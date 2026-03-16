@@ -533,7 +533,9 @@ async function sendConfirmationEmail(
           <p><strong>Date:</strong> Monday, March 16, 2026<br>
           <strong>Time:</strong> 8:00 PM - 9:00 PM EDT<br>
           <strong>Format:</strong> Online</p>
-          <p>Event access details will be sent in a follow-up email.</p>
+          <p><strong>Join the Zoom townhall here:</strong><br>
+          <a href="https://secure.sareforpresident.com/r?u=b_ZoCRUWNR8J1NoAhI-5oV3_j26tlEun5UhOW5XvmvCYlUERLybUKRz1_DpNafb7J8cIpST0Dafh9e3t_UVe1nbnK-Hj8wcQWwuVJC-fv1k&e=54057b4c7280bd289bade5fe6d935bf7&utm_source=sareforpresident&utm_medium=email&utm_campaign=20260316_activists_reminder&n=2">Join the townhall on Zoom</a></p>
+          <p>Please keep this link handy so you can join right at 8:00 PM EDT.</p>
           <p style="color: #666; font-size: 12px; margin-top: 30px;">Paid for by Vega for Congress<br>Bronx, NY 10459</p>
         `;
       }

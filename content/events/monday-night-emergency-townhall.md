@@ -1,25 +1,27 @@
 ---
-title: "Win the Revolution Against the Epstein Class!"
-subtitle: "Shut down the Hellfire club"
-description: "Sign up for Win the Revolution Against the Epstein Class! and join the fight to shut down the Hellfire club."
+title: "Declare Independence from the Epstein Class!!"
+subtitle: "Shut Down the Hellfire Club!!"
+description: "Join Jose Vega, Brian McGinnis, Anthony Aguilar, and Diane Sare at 8 PM to declare independence from the Epstein class and build an Independent Candidates for Peace Through Development movement."
 eventDate: "2026-03-16T20:00:00-04:00"
 endDate: "2026-03-16T21:00:00-04:00"
 location: "Online Townhall"
-address: "Private access details sent after RSVP"
+address: "Zoom link emailed immediately after RSVP"
 eventType: "Emergency Townhall"
 ticketPrice: "Free"
 ---
 
-Join Jose Vega and featured guests for Win the Revolution Against the Epstein Class! Share this page widely and help bring others into the fight to shut down the Hellfire club.
+Declare Independence from the Epstein Class!! Shut Down the Hellfire Club!! 8 PM.
 
-One week ago, the United States and Israel launched an ill-conceived and illegal war of aggression against the nation of Iran. This war is not merely directed at Iran but is directed, as Pete Hegseth recently admitted, against what he calls the "global south," which actually is the Global Majority.
+This is a time when a new crop of leaders must emerge from the United States. The country has been embarked upon an inevitable path to extinction in the short term. Since it is possible that the United States might not even survive its 250th birthday year, that new leadership must step forward now.
 
-Operation Epic Fury is already unleashing many unforeseen consequences. That is unforeseen if you are operating from the standpoint of a messianic, delusional, pseudo-religious outlook, but not unforeseen if you view the world as Lyndon LaRouche did, from the standpoint of multiply connected dynamic processes within a lawfully ordered universe.
+Independent Congressional candidates Jose Vega, Brian McGinnis, and Anthony Aguilar, along with Independent candidate for President Diane Sare, call on the nation, particularly former members of the United States military, to form a nationwide Independent Candidates for Peace Through Development movement.
 
-Congress has abdicated responsibility when both houses voted against enforcing the war powers resolution, which reflects the constitutional mandate in Article I, Section 8 of the U.S. Constitution: Congress, not the president, must determine whether to declare war. Therefore, the responsibility to change the course of history of the United States by ending this insanity falls to the American people.
+The first order of business is to make the President and the Congress carry out their obligations to uphold the United States Constitution. They have allowed multiple illegal and criminal wars to occur. These wars are occurring against the will and the interests of the American people. Those who swore to preserve and protect the Constitution against its enemies, foreign and domestic, must act now, and publicly, to oppose the Epstein War Party and rally the American people.
 
-The situation is rapidly spiraling out of control. Many physical economic disruptions are already occurring, including the price of gas, shortages of LNG that cannot be automatically turned back on, and major fertilizer inflation, for which 45% of the urea comes from the Middle East.
+On St. Patrick's Day 250 years ago, the American Patriot forces led by Gen. George Washington forced the British Navy, then the most powerful force of its type in the world, to evacuate Boston Harbor. Feats of extraordinary ingenuity and perseverance were required and performed by Washington's officers. Several were self-taught, including the 25-year-old Henry Knox and Nathaniel Greene.
 
-The entire Congress needs to be purged, with perhaps the exception of a handful of representatives like Thomas Massie and Ro Khanna, who have stood up both on the Epstein criminal class and against the Iran war.
+This ended an eight-year occupation by the British and was considered a "miracle" victory, which the Americans were thought to be incapable of. It is in the spirit and recognition of that success against all odds 250 years ago that we call upon the people of this nation, despite their presently failing institutions, to free this nation, and the world, from the tyranny of the Epstein class before the world reaches a thermonuclear point of no return.
 
-Sign up now and join the event.
+Shut Down the Hellfire Club!!
+
+Sign up now and join the event. As soon as you RSVP, you will receive a confirmation email with the Zoom link and instructions to join.

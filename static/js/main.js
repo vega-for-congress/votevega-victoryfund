@@ -420,7 +420,7 @@
                                     </div>
                                     <h3 class="fw-bold mb-3">You are signed up.</h3>
                                     <p class="mb-0" style="font-size: 1.1rem; color: #495057;">
-                                        Your registration is confirmed for ${eventName}. Please check your email for event details.
+                                        Your registration is confirmed for ${eventName}. Please check your email for the Zoom link and join instructions.
                                     </p>
                                 </div>
                             `;
