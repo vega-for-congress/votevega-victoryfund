@@ -1,4 +1,12 @@
 {{ define "main" }}
+<section class="townhall-banner">
+    <div class="container">
+        <a href="{{ "/events/independent-candidates-townhall-tonight/#event-rsvp" | relURL }}" class="townhall-banner__link">
+            <span class="townhall-banner__label">Tonight at 8PM Eastern with independent candidates</span>
+            <span class="townhall-banner__cta">Register for the townhall!</span>
+        </a>
+    </div>
+</section>
 <!-- Alternative Hero Section -->
 <!-- Desktop Version -->
 <div id="alt-hero" class="position-relative d-none d-md-block">
@@ -12,6 +20,7 @@
     <!-- Desktop: Buttons in right side overlay -->
     <div class="alt-buttons-desktop">
         <h2 class="alt-hero-text">{{ i18n "hero_title" }}</h2>
+        <a href="{{ "/events/independent-candidates-townhall-tonight/#event-rsvp" | relURL }}" class="btn btn-lg btn-gold alt-btn">Register for the townhall!</a>
         <a href="{{ .Site.Params.donateUrl }}" class="btn btn-lg btn-primary alt-btn">{{ i18n "hero_donate" }}</a>
         <a href="#volunteer" class="btn btn-lg btn-gold alt-btn">{{ i18n "hero_volunteer" }}</a>
     </div>
@@ -31,6 +40,7 @@
     <div class="mobile-content-below">
         <h2 class="mobile-hero-text">{{ i18n "hero_title" }}</h2>
         <div class="mobile-button-stack">
+            <a href="{{ "/events/independent-candidates-townhall-tonight/#event-rsvp" | relURL }}" class="btn btn-lg btn-gold mobile-btn">Register for the townhall!</a>
             <a href="{{ .Site.Params.donateUrl }}" class="btn btn-lg btn-primary mobile-btn">{{ i18n "hero_donate" }}</a>
             <a href="#volunteer" class="btn btn-lg btn-gold mobile-btn">{{ i18n "hero_volunteer" }}</a>
         </div>
