@@ -51,3 +51,4 @@ workers/**/.wrangler/
 workers/**/.dev.vars
 
 node_modules
+.aider*
