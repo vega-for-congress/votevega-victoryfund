@@ -86,7 +86,7 @@ jobs:
           model: openrouter/anthropic/claude-3-7-sonnet-20250219
           api_key_env_name: OPENROUTER_API_KEY
           api_key_env_value: ${{ secrets.OPENROUTER_API_KEY }}
-          branch: aider/issue-${{ github.event.issue.number }}
+          branch: main  # Use main for dry run; switch to aider/issue-${{ github.event.issue.number }} when going live
           aider_args: >-
             --yes
             --dry-run
