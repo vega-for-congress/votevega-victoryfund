@@ -81,7 +81,7 @@ jobs:
           echo "prompt=$PROMPT" >> "$GITHUB_OUTPUT"
 
       - name: Run aider (dry run)
-        uses: mirrajabi/aider-github-action@v1
+        uses: mirrajabi/aider-github-action@v1.1.0
         with:
           model: openrouter/anthropic/claude-3-7-sonnet-20250219
           api_key_env_name: OPENROUTER_API_KEY
