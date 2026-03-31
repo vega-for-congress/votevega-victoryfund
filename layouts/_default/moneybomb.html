@@ -59,32 +59,33 @@
                     <h1 class="mb-hero__title">Save the Bronx<br><span class="text-accent">Moneybomb</span></h1>
                     <p class="mb-hero__subtitle">A 48-hour flash fundraiser to send a fighter to Congress.</p>
 
-                    <!-- Countdown -->
-                    <div class="mb-countdown" id="countdown">
-                        <div class="mb-countdown__block">
-                            <span class="mb-countdown__number" id="cd-days">00</span>
-                            <span class="mb-countdown__label">Days</span>
+                    <!-- Countdown + Donate -->
+                    <div class="mb-countdown-cta">
+                        <div class="mb-countdown" id="countdown">
+                            <div class="mb-countdown__block">
+                                <span class="mb-countdown__number" id="cd-days">00</span>
+                                <span class="mb-countdown__label">Days</span>
+                            </div>
+                            <div class="mb-countdown__sep">:</div>
+                            <div class="mb-countdown__block">
+                                <span class="mb-countdown__number" id="cd-hours">00</span>
+                                <span class="mb-countdown__label">Hours</span>
+                            </div>
+                            <div class="mb-countdown__sep">:</div>
+                            <div class="mb-countdown__block">
+                                <span class="mb-countdown__number" id="cd-minutes">00</span>
+                                <span class="mb-countdown__label">Min</span>
+                            </div>
+                            <div class="mb-countdown__sep">:</div>
+                            <div class="mb-countdown__block">
+                                <span class="mb-countdown__number" id="cd-seconds">00</span>
+                                <span class="mb-countdown__label">Sec</span>
+                            </div>
                         </div>
-                        <div class="mb-countdown__sep">:</div>
-                        <div class="mb-countdown__block">
-                            <span class="mb-countdown__number" id="cd-hours">00</span>
-                            <span class="mb-countdown__label">Hours</span>
-                        </div>
-                        <div class="mb-countdown__sep">:</div>
-                        <div class="mb-countdown__block">
-                            <span class="mb-countdown__number" id="cd-minutes">00</span>
-                            <span class="mb-countdown__label">Min</span>
-                        </div>
-                        <div class="mb-countdown__sep">:</div>
-                        <div class="mb-countdown__block">
-                            <span class="mb-countdown__number" id="cd-seconds">00</span>
-                            <span class="mb-countdown__label">Sec</span>
-                        </div>
+                        <a href="{{ .Site.Params.donateUrl }}" class="btn btn-donate btn-lg" target="_blank" rel="noopener">
+                            <i class="fas fa-bolt me-2"></i>Donate Now
+                        </a>
                     </div>
-
-                    <a href="{{ .Site.Params.donateUrl }}" class="btn btn-donate btn-lg" target="_blank" rel="noopener">
-                        <i class="fas fa-bolt me-2"></i>Donate Now
-                    </a>
                 </div>
 
                 <!-- Thermometer -->
@@ -263,30 +264,32 @@
         <div class="container text-center">
             <h2 class="mb-final-cta__title">Time is running out.</h2>
             <p class="mb-final-cta__sub">Join hundreds of grassroots donors. Make your contribution before the clock hits zero.</p>
-            <div class="mb-countdown mb-countdown--light" id="countdown-bottom">
-                <div class="mb-countdown__block">
-                    <span class="mb-countdown__number" id="cd2-days">00</span>
-                    <span class="mb-countdown__label">Days</span>
+            <div class="mb-countdown-cta mb-countdown-cta--center">
+                <div class="mb-countdown mb-countdown--light" id="countdown-bottom">
+                    <div class="mb-countdown__block">
+                        <span class="mb-countdown__number" id="cd2-days">00</span>
+                        <span class="mb-countdown__label">Days</span>
+                    </div>
+                    <div class="mb-countdown__sep">:</div>
+                    <div class="mb-countdown__block">
+                        <span class="mb-countdown__number" id="cd2-hours">00</span>
+                        <span class="mb-countdown__label">Hours</span>
+                    </div>
+                    <div class="mb-countdown__sep">:</div>
+                    <div class="mb-countdown__block">
+                        <span class="mb-countdown__number" id="cd2-minutes">00</span>
+                        <span class="mb-countdown__label">Min</span>
+                    </div>
+                    <div class="mb-countdown__sep">:</div>
+                    <div class="mb-countdown__block">
+                        <span class="mb-countdown__number" id="cd2-seconds">00</span>
+                        <span class="mb-countdown__label">Sec</span>
+                    </div>
                 </div>
-                <div class="mb-countdown__sep">:</div>
-                <div class="mb-countdown__block">
-                    <span class="mb-countdown__number" id="cd2-hours">00</span>
-                    <span class="mb-countdown__label">Hours</span>
-                </div>
-                <div class="mb-countdown__sep">:</div>
-                <div class="mb-countdown__block">
-                    <span class="mb-countdown__number" id="cd2-minutes">00</span>
-                    <span class="mb-countdown__label">Min</span>
-                </div>
-                <div class="mb-countdown__sep">:</div>
-                <div class="mb-countdown__block">
-                    <span class="mb-countdown__number" id="cd2-seconds">00</span>
-                    <span class="mb-countdown__label">Sec</span>
-                </div>
+                <a href="{{ .Site.Params.donateUrl }}" class="btn btn-donate btn-xl" target="_blank" rel="noopener">
+                    <i class="fas fa-bolt me-2"></i>Donate Now
+                </a>
             </div>
-            <a href="{{ .Site.Params.donateUrl }}" class="btn btn-donate btn-xl" target="_blank" rel="noopener">
-                <i class="fas fa-bolt me-2"></i>Donate Now
-            </a>
         </div>
     </section>
 

@@ -42,11 +42,15 @@
 /* ── Reset / Base ── */
 *, *::before, *::after { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
 
 body {
     margin: 0;
     padding: 0;
+    overflow-x: hidden;
     font-family: var(--font-body);
     font-size: 1rem;
     line-height: 1.6;
@@ -214,10 +218,34 @@ img { max-width: 100%; height: auto; }
 }
 
 /* =========================================
+   COUNTDOWN + DONATE WRAPPER
+   ========================================= */
+.mb-countdown-cta {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.mb-countdown-cta--center {
+    justify-content: center;
+}
+
+@media (max-width: 768px) {
+    .mb-countdown-cta {
+        flex-direction: column;
+        gap: 1.25rem;
+    }
+}
+
+/* =========================================
    COUNTDOWN TIMER
    ========================================= */
 .mb-countdown {
     display: inline-flex;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+    justify-content: center;
     align-items: center;
     gap: 0.5rem;
 }
@@ -265,9 +293,21 @@ img { max-width: 100%; height: auto; }
 }
 
 @media (max-width: 480px) {
-    .mb-countdown__block { width: 58px; padding: 10px 0; }
-    .mb-countdown__number { font-size: 1.6rem; }
-    .mb-countdown__sep { font-size: 1.4rem; }
+    .mb-countdown { gap: 0.3rem; }
+    .mb-countdown__block { width: 54px; padding: 8px 0; }
+    .mb-countdown__number { font-size: 1.4rem; }
+    .mb-countdown__sep { font-size: 1.2rem; padding-bottom: 14px; }
+
+    .btn-donate.btn-lg { font-size: 1.1rem; padding: 14px 28px; }
+    .btn-donate.btn-xl { font-size: 1.15rem; padding: 16px 32px; }
+
+    .mb-section-title { font-size: 1.8rem; letter-spacing: 1px; }
+
+    .mb-thermo { padding: 1.25rem; }
+    .mb-thermo__raised { font-size: 2.2rem; }
+
+    .sticky-bar__label { font-size: 0.75rem; letter-spacing: 0.5px; }
+    .sticky-bar__timer { font-size: 0.75rem; }
 }
 
 /* =========================================
