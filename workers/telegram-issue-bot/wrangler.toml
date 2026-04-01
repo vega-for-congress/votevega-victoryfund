@@ -8,6 +8,15 @@ GITHUB_REPO = "vega-for-congress/votevega-website"
 # Comma-separated Telegram user IDs authorized to create issues.
 # Get your ID by messaging @userinfobot on Telegram.
 ALLOWED_TELEGRAM_USER_IDS = ""
+# Max issues each user can create per day. Set to "0" to pause all users.
+DAILY_ISSUE_LIMIT = "5"
+
+# KV namespace for rate limiting persistence.
+# Create with: wrangler kv namespace create QUOTA_KV
+# Then paste the binding id below.
+[[kv_namespaces]]
+binding = "QUOTA_KV"
+id = ""  # fill after running wrangler kv namespace create QUOTA_KV
 
 # Secrets (set via `wrangler secret put <NAME>`):
 #   TELEGRAM_BOT_TOKEN       - from @BotFather
