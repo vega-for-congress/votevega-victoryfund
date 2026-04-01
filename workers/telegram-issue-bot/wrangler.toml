@@ -1,0 +1,20 @@
+name = "votevega-telegram-issue-bot"
+main = "src/index.ts"
+compatibility_date = "2024-01-01"
+
+# Plain-text config vars
+[vars]
+GITHUB_REPO = "vega-for-congress/votevega-website"
+# Comma-separated Telegram user IDs authorized to create issues.
+# Get your ID by messaging @userinfobot on Telegram.
+ALLOWED_TELEGRAM_USER_IDS = ""
+
+# Secrets (set via `wrangler secret put <NAME>`):
+#   TELEGRAM_BOT_TOKEN       - from @BotFather
+#   TELEGRAM_WEBHOOK_SECRET  - any random string you choose
+#   GITHUB_TOKEN             - GitHub fine-grained PAT with issues:write scope
+
+[observability]
+[observability.logs]
+enabled = true
+invocation_logs = true
