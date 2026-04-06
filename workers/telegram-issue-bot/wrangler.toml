@@ -1,0 +1,31 @@
+name = "votevega-telegram-issue-bot"
+main = "src/index.ts"
+compatibility_date = "2024-01-01"
+
+# Plain-text config vars
+[vars]
+GITHUB_REPO = "vega-for-congress/votevega-website"
+# Comma-separated Telegram user IDs authorized to create issues.
+# Get your ID by messaging @userinfobot on Telegram.
+ALLOWED_TELEGRAM_USER_IDS = "5189208477,5346635219,1867808219"
+# Max issues each user can create per day. Set to "0" to pause all users.
+DAILY_ISSUE_LIMIT = "5"
+NETLIFY_SITE_NAME = "votevega"
+
+# KV namespace for rate limiting persistence.
+# Create with: wrangler kv namespace create QUOTA_KV
+# Then paste the binding id below.
+[[kv_namespaces]]
+binding = "QUOTA_KV"
+id = "39f8692b02744319924774c9515a10eb"  # replace with real id from: wrangler kv namespace create QUOTA_KV
+
+# Secrets (set via `wrangler secret put <NAME>`):
+#   TELEGRAM_BOT_TOKEN       - from @BotFather
+#   TELEGRAM_WEBHOOK_SECRET  - any random string you choose
+#   GITHUB_TOKEN             - GitHub fine-grained PAT with issues:write scope
+#   NOTIFY_SECRET            - shared secret for the /notify endpoint (used by GitHub Actions)
+
+[observability]
+[observability.logs]
+enabled = true
+invocation_logs = true
