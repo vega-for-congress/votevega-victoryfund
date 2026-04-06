@@ -71,7 +71,7 @@ enableEmoji = true
   # Social media links
   [[params.social]]
     name = "Twitter/X"
-    url = "https://twitter.com/JosBtrigga"
+    url = "https://twitter.com/votevega26"
     icon = "fa-brands fa-x-twitter"
 
   [[params.social]]
