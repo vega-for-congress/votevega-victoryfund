@@ -8,27 +8,18 @@
  *   1. Webhook secret token verified on every request (only Telegram can call this)
  *   2. Allowlist of Telegram user IDs (only authorized staffers can create issues)
  *
- * Setup:
- *   1. Create a Telegram bot via @BotFather -> get the bot token
- *   2. Deploy this worker
- *   3. Register the webhook:
- *      curl -X POST "https://api.telegram.org/bot<BOT_TOKEN>/setWebhook" \
- *        -H "Content-Type: application/json" \
- *        -d '{"url":"https://telegram-issue-bot.<your-subdomain>.workers.dev/webhook",
- *             "secret_token":"<WEBHOOK_SECRET>"}'
- *   4. Set secrets via wrangler:
- *      wrangler secret put TELEGRAM_BOT_TOKEN
- *      wrangler secret put TELEGRAM_WEBHOOK_SECRET
- *      wrangler secret put GITHUB_TOKEN
+ * See DEPLOY.md in this directory for setup and deployment instructions.
  */
 
 interface Env {
   TELEGRAM_BOT_TOKEN: string;
   TELEGRAM_WEBHOOK_SECRET: string;
+  NOTIFY_SECRET: string;         // shared secret for /notify endpoint
   GITHUB_TOKEN: string;
   GITHUB_REPO: string;           // e.g. "vega-for-congress/votevega-website"
   ALLOWED_TELEGRAM_USER_IDS: string; // comma-separated, e.g. "123456789,987654321"
   DAILY_ISSUE_LIMIT: string;     // max issues per user per day, "0" = paused
+  NETLIFY_SITE_NAME: string;     // for deploy preview URLs
   QUOTA_KV: KVNamespace;         // Cloudflare KV for rate limit persistence
 }
 
@@ -58,6 +49,11 @@ export default {
 
     if (url.pathname === '/webhook' && request.method === 'POST') {
       return handleWebhook(request, env);
+    }
+
+    // Called by GitHub Actions when a PR is created for an issue
+    if (url.pathname === '/notify' && request.method === 'POST') {
+      return handleNotify(request, env);
     }
 
     // Health check
@@ -94,7 +90,7 @@ async function handleWebhook(request: Request, env: Env): Promise<Response> {
     await sendTelegramMessage(
       env.TELEGRAM_BOT_TOKEN,
       chatId,
-      'Sorry, you are not authorized to create issues. Contact the campaign webmaster.'
+      `Not authorized. Send your ID to the webmaster to get access.\n\nYour Telegram user ID: ${userId}`
     );
     return new Response('ok');
   }
@@ -170,6 +166,11 @@ async function handleWebhook(request: Request, env: Env): Promise<Response> {
 
   try {
     const issue = await createGitHubIssue(env.GITHUB_TOKEN, env.GITHUB_REPO, title, body);
+
+    // Store issue -> chat mapping so we can notify when the PR/preview is ready
+    await env.QUOTA_KV.put(`issue:${issue.number}`, String(chatId), {
+      expirationTtl: 7 * 24 * 60 * 60, // 7 days
+    });
 
     // Increment quota after successful issue creation
     await incrementUserQuota(env.QUOTA_KV, userId, quota);
@@ -256,6 +257,50 @@ async function createGitHubIssue(
   }
 
   return response.json();
+}
+
+/**
+ * Handle notifications from GitHub Actions when a PR is created.
+ * POST /notify { issue_number, pr_url }
+ * Secured with a shared secret in the Authorization header.
+ */
+async function handleNotify(request: Request, env: Env): Promise<Response> {
+  // Verify shared secret
+  const authHeader = request.headers.get('Authorization');
+  if (authHeader !== `Bearer ${env.NOTIFY_SECRET}`) {
+    return new Response('Unauthorized', { status: 403 });
+  }
+
+  const { issue_number, pr_url, pr_number } = await request.json() as {
+    issue_number: number;
+    pr_url: string;
+    pr_number?: number;
+  };
+
+  if (!issue_number || !pr_url) {
+    return new Response('Missing issue_number or pr_url', { status: 400 });
+  }
+
+  // Look up the chat that created this issue
+  const chatIdStr = await env.QUOTA_KV.get(`issue:${issue_number}`);
+  if (!chatIdStr) {
+    return new Response('No chat mapping found for this issue', { status: 404 });
+  }
+
+  const chatId = parseInt(chatIdStr, 10);
+  const previewUrl = pr_number
+    ? `https://deploy-preview-${pr_number}--${env.NETLIFY_SITE_NAME}.netlify.app/`
+    : null;
+
+  let message = `PR ready for issue #${issue_number}: ${pr_url}`;
+  if (previewUrl) {
+    message += `\n\nDeploy preview (may take a minute to build):\n${previewUrl}`;
+  }
+  message += '\n\nIf the preview looks good, let the webmaster know to merge it.';
+
+  await sendTelegramMessage(env.TELEGRAM_BOT_TOKEN, chatId, message);
+
+  return new Response('ok');
 }
 
 /**
