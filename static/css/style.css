@@ -1043,6 +1043,58 @@ h1, h2, h3, h4, h5, h6 {
     transition: all 0.3s ease;
 }
 
+/* Focus-visible styles for keyboard navigation */
+.btn:focus-visible,
+.nav-link:focus-visible,
+.dropdown-item:focus-visible,
+.social-icons a:focus-visible {
+    outline: 2px solid var(--primary-blue);
+    outline-offset: 2px;
+}
+
+.btn-primary:focus-visible {
+    background: linear-gradient(135deg, #dc2626, #b91c1c);
+    box-shadow: 0 6px 18px rgba(230, 57, 70, 0.4);
+    transform: translateY(-2px);
+}
+
+.btn-gold:focus-visible {
+    background: linear-gradient(135deg, #1a1a1a, #333333);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+    transform: translateY(-2px);
+}
+
+.btn-secondary:focus-visible {
+    background-color: #5a6268;
+    transform: translateY(-1px);
+}
+
+.btn-green:focus-visible {
+    background: linear-gradient(135deg, #1f2937, #111827);
+    box-shadow: 0 6px 18px rgba(55, 65, 81, 0.3);
+    transform: translateY(-2px);
+}
+
+.btn-dark-blue:focus-visible {
+    background: linear-gradient(135deg, #1d4ed8, #2563eb);
+    box-shadow: 0 6px 18px rgba(30, 64, 175, 0.3);
+    transform: translateY(-2px);
+}
+
+a:focus-visible > .issue-link {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    background-color: #ffffff !important;
+}
+
+a:focus-visible > .issue-link h3 {
+    color: #dc3545 !important;
+}
+
+a:focus-visible > .issue-link small {
+    opacity: 1 !important;
+}
+
 /* Alternative Hero Layout - Responsive Overlay */
 #alt-hero {
     position: relative;
@@ -1951,6 +2003,51 @@ blockquote p:last-child {
 .townhall-banner__link:focus {
     color: #ffffff;
     text-decoration: none;
+}
+
+.townhall-banner__link:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: 2px;
+}
+
+/* Visually hidden but accessible to screen readers; shown on hover */
+.visually-hidden-until-hover {
+    opacity: 0;
+}
+
+.issue-link:hover .visually-hidden-until-hover,
+a:focus-visible > .issue-link .visually-hidden-until-hover {
+    opacity: 1;
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    .btn:hover,
+    .btn:focus-visible,
+    .issue-link:hover,
+    .issue-link:focus-within,
+    .statement-card:hover,
+    .featured-statement:hover,
+    .event-card:hover,
+    .featured-event:hover,
+    .social-icons a:hover,
+    .sub-hero-container:hover .sub-hero-img,
+    .sub-hero-container:hover .sub-hero-btn {
+        transform: none !important;
+    }
 }
 
 @media (max-width: 768px) {
