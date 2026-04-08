@@ -10,7 +10,7 @@
 
             <div class="col-md-6">
                 <p class="mb-0 fs-3">
-                    <strong><a href="mailto:{{ .Site.Params.email }}" target="_blank">{{ .Site.Params.email }}</a></strong>
+                    <strong><a href="mailto:{{ .Site.Params.email }}" target="_blank" rel="noopener noreferrer">{{ .Site.Params.email }}</a></strong>
                 </p>
                 <p class="mb-1"><strong>{{ .Site.Params.address }}</strong></p>
                 <p class="mb-1">{{ .Site.Params.phone }}</p>
@@ -19,8 +19,8 @@
                 </p>
                 <div class="social-icons">
                     {{ range .Site.Params.social }}
-                    <a href="{{ .url }}" target="_blank">
-                        <i class="{{ .icon }}"></i>
+                    <a href="{{ .url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ .name }}">
+                        <i class="{{ .icon }}" aria-hidden="true"></i>
                     </a>
                     {{ end }}
                 </div>

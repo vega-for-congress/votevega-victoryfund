@@ -79,6 +79,8 @@
         // Create new message element
         const messageDiv = document.createElement('div');
         messageDiv.className = `form-message alert ${type === 'success' ? 'alert-success' : 'alert-danger'}`;
+        messageDiv.setAttribute('role', 'alert');
+        messageDiv.setAttribute('aria-live', 'assertive');
         messageDiv.innerHTML = message;
         messageDiv.style.marginTop = '1rem';
 
@@ -489,9 +491,11 @@
         
         const messageDiv = document.createElement('div');
         messageDiv.className = `form-message alert ${type === 'success' ? 'alert-success' : 'alert-danger'} mt-3`;
+        messageDiv.setAttribute('role', 'alert');
+        messageDiv.setAttribute('aria-live', 'assertive');
         messageDiv.style.borderRadius = '8px';
         messageDiv.innerHTML = `
-            <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'} me-2"></i>
+            <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'} me-2" aria-hidden="true"></i>
             ${message}
         `;
         
