@@ -29,7 +29,7 @@
     // In demo mode they drive the local simulation.
     countdownStart: '2026-04-01T00:00:00Z',
     countdownEnd: '2026-04-17T00:00:00Z',
-    goal: 50000,
+    goal: 25000,
 
     // Demo-only: starting simulated values
     startingAmount: 18742,
@@ -186,6 +186,11 @@
       ? '<div class="mb-feed__message">' + escapeHtml(donation.message) + '</div>'
       : '';
 
+    var timeStr = donation.time && !donation.time.match(/d\s*ago$/)
+      ? ' &middot; ' + escapeHtml(donation.time)
+      : '';
+    var locationStr = donation.location ? escapeHtml(donation.location) : '';
+
     item.innerHTML =
       '<div class="mb-feed__avatar">' + initials + '</div>' +
       '<div class="mb-feed__content">' +
@@ -194,7 +199,7 @@
           '<span class="mb-feed__amount">$' + donation.amount + '</span>' +
         '</div>' +
         messageHtml +
-        '<div class="mb-feed__time">' + escapeHtml(donation.location) + ' &middot; ' + donation.time + '</div>' +
+        (locationStr || timeStr ? '<div class="mb-feed__time">' + locationStr + timeStr + '</div>' : '') +
       '</div>';
     return item;
   }
