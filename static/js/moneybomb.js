@@ -19,7 +19,7 @@
     mode: 'live',
 
     // API base URL (only used in live mode)
-    apiBase: 'http://localhost:3000/api/moneybomb',
+    apiBase: 'https://secure.votevega.nyc/api/moneybomb',
 
     // How often to poll the API in live mode (ms)
     pollInterval: 30000,
