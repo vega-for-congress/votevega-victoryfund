@@ -59,7 +59,7 @@
                 <iframe 
                     style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;"
                     src="https://www.youtube.com/embed/Mp_CJUkKVIg" 
-                    title="YouTube video player" 
+                    title="Jose Vega campaign video" 
                     frameborder="0" 
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                     allowfullscreen>
@@ -75,7 +75,7 @@
         <div class="row justify-content-center">
             <div class="col-lg-8 text-center">
                 <div class="mb-5">
-                    <img width="50" src={{ "images/favicon.png" | relURL }} />
+                    <img width="50" src="{{ "images/favicon.png" | relURL }}" alt="" />
                     <h2 class="display-5 fw-bold text-uppercase my-3" style="color: #212529; letter-spacing: 1px;">{{ i18n "volunteer_title" }}</h2>
                     <p class="mb-4" style="font-size: 1.2rem; color: #495057; line-height: 1.6;">
                         {{ i18n "volunteer_description" }}
@@ -91,6 +91,7 @@
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <div class="input-group mb-3">
+                                        <label for="name" class="visually-hidden">Name</label>
                                         <span class="input-group-text border-0 shadow-sm d-none d-md-flex" style="background: #ffffff; border-radius: 10px 0 0 10px; padding: 1rem;">
                                             <i class="fas fa-user" style="color: #dc3545;"></i>
                                         </span>
@@ -101,6 +102,7 @@
                                 
                                 <div class="col-md-6">
                                     <div class="input-group mb-3">
+                                        <label for="zip" class="visually-hidden">Zip Code</label>
                                         <span class="input-group-text border-0 shadow-sm d-none d-md-flex" style="background: #ffffff; border-radius: 10px 0 0 10px; padding: 1rem;">
                                             <i class="fas fa-map-marker-alt" style="color: #dc3545;"></i>
                                         </span>
@@ -111,6 +113,7 @@
                                 
                                 <div class="col-md-6">
                                     <div class="input-group mb-3">
+                                        <label for="email" class="visually-hidden">Email</label>
                                         <span class="input-group-text border-0 shadow-sm d-none d-md-flex" style="background: #ffffff; border-radius: 10px 0 0 10px; padding: 1rem;">
                                             <i class="fas fa-envelope" style="color: #dc3545;"></i>
                                         </span>
@@ -121,6 +124,7 @@
                                 
                                 <div class="col-md-6">
                                     <div class="input-group mb-3">
+                                        <label for="phone" class="visually-hidden">Phone</label>
                                         <span class="input-group-text border-0 shadow-sm d-none d-md-flex" style="background: #ffffff; border-radius: 10px 0 0 10px; padding: 1rem;">
                                             <i class="fas fa-phone" style="color: #dc3545;"></i>
                                         </span>
@@ -150,6 +154,8 @@
                                                    transition: all 0.3s ease;" 
                                             onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(220, 53, 69, 0.4)';" 
                                             onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(220, 53, 69, 0.3)';"
+                                            onfocus="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(220, 53, 69, 0.4)';" 
+                                            onblur="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(220, 53, 69, 0.3)';"
                                             onmousedown="this.style.transform='translateY(1px)';" 
                                             onmouseup="this.style.transform='translateY(-2px)';">
                                         <i class="fas fa-handshake me-2"></i>{{ i18n "volunteer_submit" }}
@@ -194,7 +200,7 @@
                         </div>
                         <div class="flex-grow-1 d-flex flex-column justify-content-between text-center">
                             <h3 style="transition: all 0.3s ease; margin-bottom: 1rem;">{{ i18n "policy_medicare_title" }}</h3>
-                            <small class="text-muted mt-auto opacity-0" style="transition: opacity 0.3s ease; font-weight: 600;">
+                            <small class="text-muted mt-auto visually-hidden-until-hover" style="transition: opacity 0.3s ease; font-weight: 600;">
                                 <i class="fas fa-external-link-alt me-1"></i>{{ i18n "policy_read_link" }}
                             </small>
                         </div>
@@ -211,7 +217,7 @@
                         </div>
                         <div class="flex-grow-1 d-flex flex-column justify-content-between text-center">
                             <h3 style="transition: all 0.3s ease; margin-bottom: 1rem;">{{ i18n "policy_reindustrialization_title" }}</h3>
-                            <small class="text-muted mt-auto opacity-0" style="transition: opacity 0.3s ease; font-weight: 600;">
+                            <small class="text-muted mt-auto visually-hidden-until-hover" style="transition: opacity 0.3s ease; font-weight: 600;">
                                 <i class="fas fa-external-link-alt me-1"></i>{{ i18n "policy_read_link" }}
                             </small>
                         </div>
@@ -228,7 +234,7 @@
                         </div>
                         <div class="flex-grow-1 d-flex flex-column justify-content-between text-center">
                             <h3 style="transition: all 0.3s ease; margin-bottom: 1rem;">{{ i18n "policy_immigration_title" }}</h3>
-                            <small class="text-muted mt-auto opacity-0" style="transition: opacity 0.3s ease; font-weight: 600;">
+                            <small class="text-muted mt-auto visually-hidden-until-hover" style="transition: opacity 0.3s ease; font-weight: 600;">
                                 <i class="fas fa-external-link-alt me-1"></i>{{ i18n "policy_read_link" }}
                             </small>
                         </div>
@@ -245,7 +251,7 @@
                         </div>
                         <div class="flex-grow-1 d-flex flex-column justify-content-between text-center">
                             <h3 style="transition: all 0.3s ease; margin-bottom: 1rem;">{{ i18n "policy_peace_title" }}</h3>
-                            <small class="text-muted mt-auto opacity-0" style="transition: opacity 0.3s ease; font-weight: 600;">
+                            <small class="text-muted mt-auto visually-hidden-until-hover" style="transition: opacity 0.3s ease; font-weight: 600;">
                                 <i class="fas fa-external-link-alt me-1"></i>{{ i18n "policy_read_link" }}
                             </small>
                         </div>
@@ -331,7 +337,7 @@
     <div class="row justify-content-center mb-5">
         <div class="col-lg-3">
             <div class="d-grid">
-                <a href="{{ "/news/" | relURL }}" type="button" class="btn btn-lg btn-primary">{{ i18n "news_all" }}</a>
+                <a href="{{ "/news/" | relURL }}" class="btn btn-lg btn-primary">{{ i18n "news_all" }}</a>
             </div>
         </div>
     </div>
@@ -356,7 +362,7 @@
     <div class="row justify-content-center mb-5">
         <div class="col-lg-3">
             <div class="d-grid">
-                <a href="{{ "/statements/" | relURL }}" type="button" class="btn btn-lg btn-primary">{{ i18n "statements_all" }}</a>
+                <a href="{{ "/statements/" | relURL }}" class="btn btn-lg btn-primary">{{ i18n "statements_all" }}</a>
             </div>
         </div>
     </div>

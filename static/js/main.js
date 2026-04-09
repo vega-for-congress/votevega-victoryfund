@@ -79,6 +79,8 @@
         // Create new message element
         const messageDiv = document.createElement('div');
         messageDiv.className = `form-message alert ${type === 'success' ? 'alert-success' : 'alert-danger'}`;
+        messageDiv.setAttribute('role', 'alert');
+        messageDiv.setAttribute('aria-live', 'assertive');
         messageDiv.innerHTML = message;
         messageDiv.style.marginTop = '1rem';
 
@@ -420,7 +422,7 @@
                                     </div>
                                     <h3 class="fw-bold mb-3">You are signed up.</h3>
                                     <p class="mb-0" style="font-size: 1.1rem; color: #495057;">
-                                        Your registration is confirmed for ${eventName}. Please check your email for the Zoom link and join instructions.
+                                        Your registration is confirmed for ${eventName}. Please check your email for confirmation and event details.
                                     </p>
                                 </div>
                             `;
@@ -489,9 +491,11 @@
         
         const messageDiv = document.createElement('div');
         messageDiv.className = `form-message alert ${type === 'success' ? 'alert-success' : 'alert-danger'} mt-3`;
+        messageDiv.setAttribute('role', 'alert');
+        messageDiv.setAttribute('aria-live', 'assertive');
         messageDiv.style.borderRadius = '8px';
         messageDiv.innerHTML = `
-            <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'} me-2"></i>
+            <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'} me-2" aria-hidden="true"></i>
             ${message}
         `;
         

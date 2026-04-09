@@ -1,0 +1,15 @@
+{
+  "name": "votevega-telegram-issue-bot",
+  "version": "1.0.0",
+  "description": "Telegram bot that creates GitHub issues for the votevega website auto-PR workflow",
+  "main": "src/index.ts",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "tail": "wrangler tail"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20241127.0",
+    "wrangler": "^3.95.0"
+  }
+}
