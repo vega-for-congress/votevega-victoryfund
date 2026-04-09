@@ -30,6 +30,8 @@ interface FormData {
   'cf-turnstile-response': string;
   emailOptIn?: boolean;
   comment?: string;
+  registeredVoter?: string;
+  availability?: string;
 }
 
 interface NocoDBRow {
@@ -132,9 +134,22 @@ export default {
       // Add email opt-in status (only true if explicitly opted in)
       submission.Email_Opt_In = formData.emailOptIn === true;
       
-      // Add comment if provided
+      const commentParts: string[] = [];
+
       if (formData.comment) {
-        submission.Comment = formData.comment.substring(0, 500); // Limit to 500 chars
+        commentParts.push(formData.comment.trim());
+      }
+
+      if (formData.registeredVoter) {
+        commentParts.push(`Registered voter in New York State: ${formData.registeredVoter.trim()}`);
+      }
+
+      if (formData.availability) {
+        commentParts.push(`Availability from April 14 to May 7: ${formData.availability.trim()}`);
+      }
+
+      if (commentParts.length > 0) {
+        submission.Comment = commentParts.join('\n\n').substring(0, 2000);
       }
 
       const nocodbSuccess = await submitToNocoDB(submission, env);
@@ -300,8 +315,23 @@ function validateFormData(data: Partial<FormData>): { valid: boolean; error?: st
     return { valid: false, error: 'Valid phone number is required' };
   }
 
-  if (!data.zip || data.zip.trim().length < 5) {
+  const requiresZip = data.source !== 'independent-ballot-petitioning';
+  if (requiresZip && (!data.zip || data.zip.trim().length < 5)) {
     return { valid: false, error: 'Valid ZIP code is required' };
+  }
+
+  if (data.source === 'independent-ballot-petitioning') {
+    if (!data.address || data.address.trim().length < 10) {
+      return { valid: false, error: 'Registered address is required' };
+    }
+
+    if (!data.registeredVoter || data.registeredVoter.trim().length < 2) {
+      return { valid: false, error: 'Please tell us if you are a registered New York voter' };
+    }
+
+    if (!data.availability || data.availability.trim().length < 10) {
+      return { valid: false, error: 'Please share your availability from April 14 to May 7' };
+    }
   }
 
   return { valid: true };
@@ -384,6 +414,8 @@ function parseFormData(body: string): Partial<FormData> {
     'cf-turnstile-response': params.get('cf-turnstile-response') || '',
     emailOptIn: emailOptInParam === null ? undefined : emailOptInParam === 'true',
     comment: params.get('comment') || undefined,
+    registeredVoter: params.get('registeredVoter') || undefined,
+    availability: params.get('availability') || undefined,
   };
 }
 

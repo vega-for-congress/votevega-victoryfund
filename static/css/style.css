@@ -2010,6 +2010,210 @@ blockquote p:last-child {
     outline-offset: 2px;
 }
 
+/* Independent ballot petitioning page */
+.petition-drive-page {
+    background:
+        radial-gradient(circle at top left, rgba(195, 57, 43, 0.14), transparent 36%),
+        radial-gradient(circle at top right, rgba(243, 179, 64, 0.18), transparent 34%),
+        linear-gradient(180deg, #f6f0e8 0%, #fffaf4 42%, #f7f7f5 100%);
+}
+
+.petition-drive-hero {
+    padding: 7.5rem 0 3rem;
+}
+
+.petition-drive-eyebrow {
+    display: inline-block;
+    padding: 0.45rem 0.9rem;
+    border-radius: 999px;
+    background: rgba(17, 17, 17, 0.92);
+    color: #f3b340;
+    font-family: var(--font-headings);
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.petition-drive-title {
+    margin-top: 1.2rem;
+    font-size: clamp(2.7rem, 5vw, 4.6rem);
+    line-height: 0.95;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: #161616;
+}
+
+.petition-drive-subtitle {
+    margin: 1rem 0 0;
+    font-size: 1.35rem;
+    color: #8f2d24;
+    font-weight: 600;
+}
+
+.petition-drive-copy {
+    margin: 1.5rem 0 0;
+    max-width: 42rem;
+    font-size: 1.16rem;
+    color: #333333;
+}
+
+.petition-drive-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.petition-drive-card {
+    border-radius: 1.35rem;
+    overflow: hidden;
+    background: #111111;
+    box-shadow: 0 22px 45px rgba(17, 17, 17, 0.18);
+}
+
+.petition-drive-image {
+    display: block;
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+}
+
+.petition-drive-card-body {
+    padding: 1.5rem;
+    color: #f5f1e8;
+}
+
+.petition-drive-card-body h2 {
+    margin-bottom: 1rem;
+    font-size: 1.45rem;
+    text-transform: uppercase;
+}
+
+.petition-drive-checklist {
+    padding-left: 1.25rem;
+    margin: 0;
+}
+
+.petition-drive-checklist li + li {
+    margin-top: 0.65rem;
+}
+
+.petition-drive-form-wrap {
+    padding: 1rem 0 5rem;
+}
+
+.petition-drive-form-card {
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(17, 17, 17, 0.08);
+    border-radius: 1.5rem;
+    box-shadow: 0 24px 44px rgba(71, 46, 30, 0.12);
+    padding: 2rem;
+}
+
+.petition-drive-form-intro {
+    margin-bottom: 1.75rem;
+}
+
+.petition-drive-step {
+    display: inline-block;
+    margin-bottom: 0.75rem;
+    color: #8f2d24;
+    font-family: var(--font-headings);
+    font-size: 0.88rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+}
+
+.petition-drive-form-intro h2 {
+    margin-bottom: 0.65rem;
+    font-size: clamp(2rem, 3vw, 3rem);
+    color: #171717;
+}
+
+.petition-drive-form .form-label {
+    font-family: var(--font-headings);
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #2a2a2a;
+}
+
+.petition-drive-form .form-control,
+.petition-drive-form .form-select {
+    border: 1px solid rgba(17, 17, 17, 0.12);
+    border-radius: 1rem;
+    padding: 0.95rem 1rem;
+    font-size: 1rem;
+    box-shadow: none;
+}
+
+.petition-drive-form .form-control:focus,
+.petition-drive-form .form-select:focus {
+    border-color: rgba(195, 57, 43, 0.55);
+    box-shadow: 0 0 0 0.2rem rgba(195, 57, 43, 0.14);
+}
+
+.petition-drive-schedule {
+    min-height: 12rem;
+}
+
+.petition-drive-note {
+    margin-top: 1.25rem;
+    padding: 1rem 1.15rem;
+    border-radius: 1rem;
+    background: #f6eee5;
+    color: #4a3426;
+    font-size: 0.98rem;
+}
+
+.petition-drive-submit {
+    min-width: 18rem;
+    border-radius: 999px;
+    padding: 0.9rem 1.4rem;
+}
+
+@media (max-width: 991.98px) {
+    .petition-drive-hero {
+        padding-top: 6.5rem;
+    }
+
+    .petition-drive-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .petition-drive-actions .btn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .petition-drive-hero {
+        padding-top: 5.75rem;
+    }
+
+    .petition-drive-form-card {
+        padding: 1.35rem;
+        border-radius: 1.1rem;
+    }
+
+    .petition-drive-title {
+        line-height: 1.02;
+    }
+
+    .petition-drive-image {
+        height: 240px;
+    }
+
+    .petition-drive-submit {
+        width: 100%;
+        min-width: 0;
+    }
+}
+
 /* Visually hidden but accessible to screen readers; shown on hover */
 .visually-hidden-until-hover {
     opacity: 0;

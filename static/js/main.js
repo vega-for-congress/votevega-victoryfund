@@ -391,6 +391,18 @@
                     if (formData.get('address')) {
                         data.address = formData.get('address');
                     }
+
+                    if (formData.get('registeredVoter')) {
+                        data.registeredVoter = formData.get('registeredVoter');
+                    }
+
+                    if (formData.get('availability')) {
+                        data.availability = formData.get('availability');
+                    }
+
+                    if (formData.get('comment')) {
+                        data.comment = formData.get('comment');
+                    }
                     
                     // Log whether Turnstile was available
                     if (turnstileToken) {
@@ -423,6 +435,18 @@
                                     <h3 class="fw-bold mb-3">You are signed up.</h3>
                                     <p class="mb-0" style="font-size: 1.1rem; color: #495057;">
                                         Your registration is confirmed for ${eventName}. Please check your email for confirmation and event details.
+                                    </p>
+                                </div>
+                            `;
+                        } else if (data.source === 'independent-ballot-petitioning') {
+                            formContainer.innerHTML = `
+                                <div class="text-center py-5">
+                                    <div class="mb-4">
+                                        <i class="fas fa-check-circle" style="font-size: 4rem; color: #28a745;"></i>
+                                    </div>
+                                    <h3 class="fw-bold mb-3">You are signed up to petition.</h3>
+                                    <p class="mb-0" style="font-size: 1.1rem; color: #495057;">
+                                        Thank you for joining the independent ballot access drive. Our team will contact you soon with petitioning locations and times between April 14 and May 7.
                                     </p>
                                 </div>
                             `;

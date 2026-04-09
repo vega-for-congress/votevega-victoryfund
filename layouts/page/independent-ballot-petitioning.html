@@ -1,0 +1,103 @@
+{{ define "main" }}
+<section class="petition-drive-page">
+  <div class="petition-drive-hero">
+    <div class="container">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-7">
+          <span class="petition-drive-eyebrow">Independent Ballot Access</span>
+          <h1 class="petition-drive-title">{{ .Title }}</h1>
+          {{ with .Params.subtitle }}<p class="petition-drive-subtitle">{{ . }}</p>{{ end }}
+          <p class="petition-drive-copy">
+            From <strong>April 14, 2026</strong> through <strong>May 7, 2026</strong>, we are building a citywide petitioning effort to secure Jose Vega's place on the independent ballot.
+            If you can come out with us, sign up below and tell us when you are available. <strong>Supporters can volunteer whether they are registered in New York or not</strong> and we will plug people into the right roles.
+          </p>
+          <div class="petition-drive-actions">
+            <a class="btn btn-primary btn-lg" href="#petition-signup">Sign Up to Petition</a>
+            <a class="btn btn-outline-dark btn-lg" href="https://voterlookup.elections.ny.gov/" target="_blank" rel="noopener noreferrer">Check Voter Registration</a>
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <div class="petition-drive-card">
+            <img src="{{ "images/group_photo_petitioners.jpg" | relURL }}" alt="Jose Vega with petitioners in the campaign office" class="petition-drive-image">
+            <div class="petition-drive-card-body">
+              <h2>What We Need</h2>
+              <ul class="petition-drive-checklist">
+                <li>Volunteers from New York and beyond who want to help the drive win.</li>
+                <li>Your New York voter status so we can place you where you are most useful.</li>
+                <li>Your registered address if you vote in New York, so the team can verify details.</li>
+                <li>A phone number and your availability between April 14 and May 7.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="petition-drive-form-wrap" id="petition-signup">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-xl-9">
+          <div class="petition-drive-form-card">
+            <div class="petition-drive-form-intro">
+              <span class="petition-drive-step">Signup Form</span>
+              <h2>Tell us when you can come out</h2>
+              <p>
+                Fill this out and our ballot access team will follow up with locations, shifts, and next steps.
+              </p>
+            </div>
+
+            <form class="volunteer-form petition-drive-form">
+              <input type="hidden" name="whichform" value="independent-ballot-petitioning">
+              <input type="hidden" name="zip" value="">
+
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label" for="petition-name">Full name</label>
+                  <input class="form-control form-control-lg" id="petition-name" name="name" autocomplete="name" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" for="petition-email">Email</label>
+                  <input class="form-control form-control-lg" id="petition-email" name="email" type="email" autocomplete="email" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" for="petition-phone">Phone number</label>
+                  <input class="form-control form-control-lg" id="petition-phone" name="phone" type="tel" autocomplete="tel" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" for="petition-voter-status">Are you a registered voter in New York State?</label>
+                  <select class="form-select form-select-lg" id="petition-voter-status" name="registeredVoter" required>
+                    <option value="" selected disabled>Select one</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                    <option value="Not sure">Not sure</option>
+                  </select>
+                  <div class="form-text">You can still volunteer even if you are not registered in New York.</div>
+                </div>
+                <div class="col-12">
+                  <label class="form-label" for="petition-address">What address are you registered at?</label>
+                  <textarea class="form-control" id="petition-address" name="address" rows="3" placeholder="If you are registered in New York, enter your voter registration address. Otherwise write 'Not registered in NY'." required></textarea>
+                </div>
+                <div class="col-12">
+                  <label class="form-label" for="petition-schedule">What is your schedule from April 14 to May 7, and what times can you come out with us?</label>
+                  <textarea class="form-control petition-drive-schedule" id="petition-schedule" name="availability" rows="7" placeholder="Example: Weeknights after 6 PM in the Bronx, Saturdays 11 AM to 4 PM, unavailable April 21-23." required></textarea>
+                </div>
+              </div>
+
+              <div class="petition-drive-note">
+                <strong>Note:</strong> We will use this information only to organize the petitioning drive and contact you about shifts. Volunteers are welcome whether they are registered in New York or not.
+              </div>
+
+              <div class="text-center mt-4">
+                <button type="submit" class="btn btn-primary btn-lg petition-drive-submit">
+                  <i class="fas fa-clipboard-list me-2"></i>Join the Petition Drive
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{{ end }}
