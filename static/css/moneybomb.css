@@ -897,3 +897,45 @@ img { max-width: 100%; height: auto; }
 .mb-footer__legal a:hover {
     color: var(--mb-red);
 }
+
+/* =========================================
+   SKELETON LOADING STATE
+   ========================================= */
+@keyframes skeletonPulse {
+    0% { opacity: 0.15; }
+    50% { opacity: 0.3; }
+    100% { opacity: 0.15; }
+}
+
+.mb-skeleton__bar {
+    display: block;
+    height: 14px;
+    border-radius: 7px;
+    background: rgba(255, 255, 255, 0.15);
+    animation: skeletonPulse 1.4s ease-in-out infinite;
+}
+
+.mb-skeleton__circle {
+    background: rgba(255, 255, 255, 0.1) !important;
+    animation: skeletonPulse 1.4s ease-in-out infinite;
+}
+
+.mb-skeleton .mb-minifeed__name,
+.mb-skeleton .mb-minifeed__amount {
+    display: none;
+}
+
+.mb-skeleton .mb-feed__avatar {
+    background: rgba(255, 255, 255, 0.1);
+    animation: skeletonPulse 1.4s ease-in-out infinite;
+}
+
+.mb-skeleton .mb-feed__content {
+    flex: 1;
+}
+
+/* Stagger the animation for a nicer effect */
+.mb-skeleton:nth-child(2) { animation-delay: 0.15s; }
+.mb-skeleton:nth-child(3) { animation-delay: 0.3s; }
+.mb-skeleton:nth-child(4) { animation-delay: 0.45s; }
+.mb-skeleton:nth-child(5) { animation-delay: 0.6s; }

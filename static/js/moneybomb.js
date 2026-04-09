@@ -299,6 +299,57 @@
   }
 
   // ===========================================
+  // LOADING STATE (live mode only)
+  // ===========================================
+
+  function showLoadingState() {
+    // Thermometer: show placeholder text
+    setText('thermo-raised', '...');
+    setText('thermo-donors', '...');
+    setText('thermo-pct', '...');
+
+    // Mini feed: show skeleton items
+    var miniFeedList = document.getElementById('mini-feed-list');
+    if (miniFeedList) {
+      miniFeedList.innerHTML = '';
+      for (var i = 0; i < 4; i++) {
+        var skeleton = document.createElement('div');
+        skeleton.className = 'mb-minifeed__item mb-skeleton';
+        skeleton.innerHTML =
+          '<span class="mb-skeleton__bar" style="width:60%"></span>' +
+          '<span class="mb-skeleton__bar" style="width:20%"></span>';
+        miniFeedList.appendChild(skeleton);
+      }
+    }
+
+    // Main feed: show skeleton items
+    var donationFeed = document.getElementById('donation-feed');
+    if (donationFeed) {
+      donationFeed.innerHTML = '';
+      for (var j = 0; j < 5; j++) {
+        var sk = document.createElement('div');
+        sk.className = 'mb-feed__item mb-skeleton';
+        sk.innerHTML =
+          '<div class="mb-feed__avatar mb-skeleton__circle"></div>' +
+          '<div class="mb-feed__content">' +
+            '<div class="mb-skeleton__bar" style="width:45%;margin-bottom:8px"></div>' +
+            '<div class="mb-skeleton__bar" style="width:80%"></div>' +
+          '</div>';
+        donationFeed.appendChild(sk);
+      }
+    }
+  }
+
+  function hideLoadingState() {
+    // Skeletons are replaced when renderLiveDonations clears innerHTML.
+    // Just remove any leftover skeleton class if feeds were empty.
+    var skeletons = document.querySelectorAll('.mb-skeleton');
+    for (var i = 0; i < skeletons.length; i++) {
+      skeletons[i].parentNode.removeChild(skeletons[i]);
+    }
+  }
+
+  // ===========================================
   // LIVE MODE — fetch real data from API
   // ===========================================
 
@@ -415,8 +466,10 @@
     updateThermometer();
 
     if (CONFIG.mode === 'live') {
-      // Live mode: fetch real data, then poll
+      // Live mode: show loading state, fetch, then poll
+      showLoadingState();
       fetchLiveData().then(function () {
+        hideLoadingState();
         setInterval(fetchLiveData, CONFIG.pollInterval);
       });
     } else {
