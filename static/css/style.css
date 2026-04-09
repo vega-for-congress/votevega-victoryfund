@@ -2065,6 +2065,10 @@ blockquote p:last-child {
     margin-top: 2rem;
 }
 
+.petition-drive-actions .btn {
+    white-space: normal;
+}
+
 .petition-drive-card {
     border-radius: 1.35rem;
     overflow: hidden;
@@ -2097,6 +2101,10 @@ blockquote p:last-child {
 
 .petition-drive-checklist li + li {
     margin-top: 0.65rem;
+}
+
+.petition-drive-checklist li {
+    line-height: 1.55;
 }
 
 .petition-drive-form-wrap {
@@ -2150,6 +2158,13 @@ blockquote p:last-child {
     box-shadow: none;
 }
 
+.petition-drive-form .form-text {
+    margin-top: 0.5rem;
+    color: #6b5a49;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
 .petition-drive-form .form-control:focus,
 .petition-drive-form .form-select:focus {
     border-color: rgba(195, 57, 43, 0.55);
@@ -2191,8 +2206,13 @@ blockquote p:last-child {
 }
 
 @media (max-width: 767.98px) {
+    .petition-drive-page .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
     .petition-drive-hero {
-        padding-top: 5.75rem;
+        padding: 5.15rem 0 1.6rem;
     }
 
     .petition-drive-form-card {
@@ -2201,16 +2221,142 @@ blockquote p:last-child {
     }
 
     .petition-drive-title {
+        margin-top: 0.9rem;
+        font-size: 2.15rem;
         line-height: 1.02;
     }
 
+    .petition-drive-subtitle {
+        font-size: 1.08rem;
+    }
+
+    .petition-drive-copy {
+        margin-top: 1rem;
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+
+    .petition-drive-actions {
+        gap: 0.75rem;
+        margin-top: 1.35rem;
+    }
+
+    .petition-drive-actions .btn {
+        padding: 0.9rem 1rem;
+        font-size: 1rem;
+    }
+
+    .petition-drive-card {
+        border-radius: 1.1rem;
+    }
+
     .petition-drive-image {
-        height: 240px;
+        height: 215px;
+    }
+
+    .petition-drive-card-body {
+        padding: 1.15rem;
+    }
+
+    .petition-drive-card-body h2 {
+        font-size: 1.2rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .petition-drive-checklist {
+        padding-left: 1rem;
+        font-size: 0.98rem;
+    }
+
+    .petition-drive-form-wrap {
+        padding: 0.35rem 0 3.25rem;
+    }
+
+    .petition-drive-form-intro {
+        margin-bottom: 1.2rem;
+    }
+
+    .petition-drive-form-intro h2 {
+        font-size: 1.7rem;
+        line-height: 1.1;
+    }
+
+    .petition-drive-form-intro p {
+        margin-bottom: 0;
+        font-size: 0.98rem;
+    }
+
+    .petition-drive-form .row.g-3 {
+        --bs-gutter-y: 0.85rem;
+    }
+
+    .petition-drive-form .form-label {
+        font-size: 0.78rem;
+        letter-spacing: 0.03em;
+        line-height: 1.35;
+        margin-bottom: 0.35rem;
+    }
+
+    .petition-drive-form .form-control,
+    .petition-drive-form .form-select {
+        font-size: 16px;
+        padding: 0.85rem 0.95rem;
+    }
+
+    .petition-drive-form textarea.form-control {
+        min-height: 8.5rem;
+    }
+
+    .petition-drive-form .form-text {
+        font-size: 0.88rem;
+    }
+
+    .petition-drive-note {
+        margin-top: 1rem;
+        padding: 0.9rem 1rem;
+        font-size: 0.92rem;
     }
 
     .petition-drive-submit {
         width: 100%;
         min-width: 0;
+        padding: 0.95rem 1rem;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 479.98px) {
+    .petition-drive-hero {
+        padding-top: 4.85rem;
+    }
+
+    .petition-drive-eyebrow {
+        font-size: 0.78rem;
+        padding: 0.4rem 0.7rem;
+    }
+
+    .petition-drive-title {
+        font-size: 1.9rem;
+    }
+
+    .petition-drive-subtitle {
+        font-size: 1rem;
+    }
+
+    .petition-drive-copy {
+        font-size: 0.96rem;
+    }
+
+    .petition-drive-image {
+        height: 190px;
+    }
+
+    .petition-drive-form-card {
+        padding: 1.1rem;
+    }
+
+    .petition-drive-form-intro h2 {
+        font-size: 1.5rem;
     }
 }
 
