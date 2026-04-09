@@ -143,6 +143,14 @@
 
     var fill = document.getElementById('thermo-fill');
     if (fill) fill.style.width = pct + '%';
+
+    // === NEW: Dynamically update milestone labels so they always match CONFIG.goal ===
+    var milestones = document.querySelectorAll('.mb-thermo__milestone');
+    var milestonePcts = [0.25, 0.5, 0.75];
+    for (var i = 0; i < milestones.length && i < milestonePcts.length; i++) {
+      var amount = Math.round(CONFIG.goal * milestonePcts[i]);
+      milestones[i].setAttribute('data-label', '$' + formatNumber(amount));
+    }
   }
 
   function formatNumber(n) {
