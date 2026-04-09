@@ -1,25 +1,37 @@
 /**
  * Save the Bronx Moneybomb — Interactive Elements
  *
- * Prototype: all data is simulated. In production, replace the
- * SIMULATED_DATA section with real API calls (e.g. ActBlue webhooks,
- * a server-sent events endpoint, etc.).
+ * Supports two modes:
+ *   'demo'  — simulated data (for development / preview)
+ *   'live'  — pulls real Stripe data from the donation-widget API
+ *
+ * Toggle the MODE value below to switch.
  */
 
 (function () {
   'use strict';
 
   // ===========================================
-  // CONFIGURATION (edit these for the real event)
+  // CONFIGURATION — edit these for the real event
   // ===========================================
   var CONFIG = {
-    // Countdown target: set to 48 hours from now for the prototype.
-    // Replace with a real ISO date string for production.
-    countdownEnd: new Date(Date.now() + 48 * 60 * 60 * 1000),
+    // 'demo' = simulated data, 'live' = real Stripe data via API
+    mode: 'live',
 
-    // Fundraising
+    // API base URL (only used in live mode)
+    apiBase: 'http://localhost:3000/api/moneybomb',
+
+    // How often to poll the API in live mode (ms)
+    pollInterval: 30000,
+
+    // ---- Single source of truth for the fundraiser window ----
+    // In live mode these are sent as query params to the API.
+    // In demo mode they drive the local simulation.
+    countdownStart: '2026-04-01T00:00:00Z',
+    countdownEnd: '2026-04-17T00:00:00Z',
     goal: 50000,
-    // Simulated starting amount (prototype only)
+
+    // Demo-only: starting simulated values
     startingAmount: 18742,
     startingDonors: 314
   };
@@ -68,7 +80,10 @@
   // ===========================================
   function updateCountdown() {
     var now = new Date().getTime();
-    var distance = CONFIG.countdownEnd.getTime() - now;
+    var end = CONFIG.countdownEnd instanceof Date
+      ? CONFIG.countdownEnd
+      : new Date(CONFIG.countdownEnd);
+    var distance = end.getTime() - now;
 
     if (distance < 0) {
       setCountdownValues(0, 0, 0, 0);
@@ -115,8 +130,8 @@
   // ===========================================
   // THERMOMETER
   // ===========================================
-  var currentAmount = CONFIG.startingAmount;
-  var currentDonors = CONFIG.startingDonors;
+  var currentAmount = CONFIG.mode === 'live' ? 0 : CONFIG.startingAmount;
+  var currentDonors = CONFIG.mode === 'live' ? 0 : CONFIG.startingDonors;
 
   function updateThermometer() {
     var pct = Math.min((currentAmount / CONFIG.goal) * 100, 100);
@@ -284,6 +299,111 @@
   }
 
   // ===========================================
+  // LIVE MODE — fetch real data from API
+  // ===========================================
+
+  // Track donation IDs we've already rendered so we can detect new ones
+  var knownDonationKeys = {};
+
+  /**
+   * Fetch moneybomb data from the API and update all UI.
+   * Returns a promise.
+   */
+  function buildApiUrl() {
+    return CONFIG.apiBase +
+      '?start=' + encodeURIComponent(CONFIG.countdownStart) +
+      '&end=' + encodeURIComponent(CONFIG.countdownEnd) +
+      '&goal=' + CONFIG.goal;
+  }
+
+  function fetchLiveData() {
+    return fetch(buildApiUrl())
+      .then(function (res) {
+        if (!res.ok) throw new Error('API returned ' + res.status);
+        return res.json();
+      })
+      .then(function (data) {
+        // Update countdown end and goal from server
+        if (data.countdownEnd) {
+          CONFIG.countdownEnd = new Date(data.countdownEnd);
+        }
+        if (data.goal) {
+          CONFIG.goal = data.goal;
+        }
+
+        // Update thermometer
+        currentAmount = data.raised || 0;
+        currentDonors = data.donors || 0;
+        updateThermometer();
+
+        // Update feeds with real donations
+        if (data.recentDonations && data.recentDonations.length > 0) {
+          renderLiveDonations(data.recentDonations);
+        }
+      })
+      .catch(function (err) {
+        console.error('Moneybomb API error:', err.message);
+      });
+  }
+
+  /**
+   * Render live donations into the mini-feed and main feed.
+   * On first call, replaces all content. On subsequent calls,
+   * prepends only new donations.
+   */
+  function renderLiveDonations(donations) {
+    var miniFeedList = document.getElementById('mini-feed-list');
+    var donationFeed = document.getElementById('donation-feed');
+    var isFirstLoad = Object.keys(knownDonationKeys).length === 0;
+
+    if (isFirstLoad) {
+      // First load: clear placeholders and render all
+      if (miniFeedList) miniFeedList.innerHTML = '';
+      if (donationFeed) donationFeed.innerHTML = '';
+
+      // Mini feed: show first 4
+      donations.slice(0, 4).forEach(function (d) {
+        if (miniFeedList) miniFeedList.appendChild(createMiniFeedItem(d));
+      });
+
+      // Main feed: show all
+      donations.forEach(function (d) {
+        if (donationFeed) donationFeed.appendChild(createFeedItem(d));
+        knownDonationKeys[donationKey(d)] = true;
+      });
+    } else {
+      // Subsequent polls: prepend only new donations
+      for (var i = donations.length - 1; i >= 0; i--) {
+        var d = donations[i];
+        var key = donationKey(d);
+        if (knownDonationKeys[key]) continue;
+        knownDonationKeys[key] = true;
+
+        // Prepend to mini feed
+        if (miniFeedList) {
+          miniFeedList.insertBefore(createMiniFeedItem(d), miniFeedList.firstChild);
+          while (miniFeedList.children.length > 4) {
+            miniFeedList.removeChild(miniFeedList.lastChild);
+          }
+        }
+
+        // Prepend to main feed
+        if (donationFeed) {
+          donationFeed.insertBefore(createFeedItem(d), donationFeed.firstChild);
+          while (donationFeed.children.length > 30) {
+            donationFeed.removeChild(donationFeed.lastChild);
+          }
+        }
+      }
+    }
+  }
+
+  /** Simple key to deduplicate donations between polls. */
+  function donationKey(d) {
+    return d.name + ':' + d.amount + ':' + d.time;
+  }
+
+  // ===========================================
   // INIT
   // ===========================================
   document.addEventListener('DOMContentLoaded', function () {
@@ -294,18 +414,24 @@
     // Thermometer — initial render
     updateThermometer();
 
-    // Seed feeds
-    seedFeeds();
+    if (CONFIG.mode === 'live') {
+      // Live mode: fetch real data, then poll
+      fetchLiveData().then(function () {
+        setInterval(fetchLiveData, CONFIG.pollInterval);
+      });
+    } else {
+      // Demo mode: simulated feeds
+      seedFeeds();
 
-    // Simulate new donations every 5–15 seconds
-    function scheduleNext() {
-      var delay = 5000 + Math.random() * 10000;
-      setTimeout(function () {
-        simulateNewDonation();
-        scheduleNext();
-      }, delay);
+      function scheduleNext() {
+        var delay = 5000 + Math.random() * 10000;
+        setTimeout(function () {
+          simulateNewDonation();
+          scheduleNext();
+        }, delay);
+      }
+      scheduleNext();
     }
-    scheduleNext();
 
     // Sticky bar
     initStickyBar();
