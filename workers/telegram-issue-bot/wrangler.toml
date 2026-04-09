@@ -7,7 +7,7 @@ compatibility_date = "2024-01-01"
 GITHUB_REPO = "vega-for-congress/votevega-website"
 # Comma-separated Telegram user IDs authorized to create issues.
 # Get your ID by messaging @userinfobot on Telegram.
-ALLOWED_TELEGRAM_USER_IDS = "5189208477,5346635219,1867808219"
+ALLOWED_TELEGRAM_USER_IDS = "2014853763,5189208477,5346635219,1867808219"
 # Max issues each user can create per day. Set to "0" to pause all users.
 DAILY_ISSUE_LIMIT = "5"
 NETLIFY_SITE_NAME = "votevega"
