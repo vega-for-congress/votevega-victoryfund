@@ -1,370 +1,317 @@
-{{ define "main" }}
-<section class="townhall-banner">
-    <div class="container">
-        <a href="{{ "/statements/surveillance-against-jose-vega/" | relURL }}" class="townhall-banner__link">
-            <span class="townhall-banner__label">Campaign Statement: Jose Vega's Residence Placed Under Surveillance</span>
-            <span class="townhall-banner__cta">Read the statement</span>
-        </a>
-    </div>
-</section>
-<!-- Alternative Hero Section -->
-<!-- Desktop Version -->
-<div id="alt-hero" class="position-relative d-none d-md-block">
-    <img src="{{ "images/minty_hero_image.jpg" | relURL }}" alt="Jose Vega" class="alt-hero-img">
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ .Title }} | Jose Vega for Congress</title>
+    <meta name="description" content="{{ .Description }}">
 
-    <!-- Logo Overlay -->
-    <div class="alt-hero-logo">
-        <img src="{{ "images/logo_red_black.png" | relURL }}" alt="Jose Vega for Congress Logo">
-    </div>
+    <!-- Open Graph -->
+    <meta property="og:title" content="{{ .Title }}">
+    <meta property="og:description" content="{{ .Description }}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ .Permalink }}">
+    <meta property="og:image" content="{{ .Site.BaseURL }}{{ .Site.Params.ogImage }}">
 
-    <!-- Desktop: Buttons in right side overlay -->
-    <div class="alt-buttons-desktop">
-        <h2 class="alt-hero-text">{{ i18n "hero_title" }}</h2>
-        <a href="{{ .Site.Params.donateUrl }}" class="btn btn-lg btn-primary alt-btn">{{ i18n "hero_donate" }}</a>
-        <a href="#volunteer" class="btn btn-lg btn-gold alt-btn">{{ i18n "hero_volunteer" }}</a>
-    </div>
-</div>
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ .Title }}">
+    <meta name="twitter:description" content="{{ .Description }}">
 
-<!-- Mobile Version - Stacked Layout -->
-<div id="alt-hero-mobile" class="d-md-none">
-    <div class="mobile-hero-image position-relative">
-        <img src="{{ "images/minty_hero_image.jpg" | relURL }}" alt="Jose Vega" class="mobile-hero-img">
-        <!-- Logo Overlay on Mobile -->
-        <div class="mobile-hero-logo">
-            <img src="{{ "images/logo_red_black.png" | relURL }}" alt="Jose Vega for Congress Logo">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{{ "images/favicon.png" | relURL }}">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Moneybomb CSS -->
+    <link rel="stylesheet" href="{{ "css/moneybomb.css" | relURL }}">
+</head>
+<body>
+
+    <!-- ====== STICKY DONATE BAR ====== -->
+    <div id="sticky-bar" class="sticky-bar">
+        <div class="container d-flex justify-content-between align-items-center">
+            <span class="sticky-bar__label">Save the Bronx Moneybomb</span>
+            <div class="d-flex align-items-center gap-3">
+                <span class="sticky-bar__timer" id="sticky-timer"></span>
+                <a href="{{ .Site.Params.donateUrl }}?ref=moneybomb" class="btn btn-donate btn-sm" target="_blank" rel="noopener">Donate Now</a>
+            </div>
         </div>
     </div>
 
-    <!-- Mobile: Content Below Image -->
-    <div class="mobile-content-below">
-        <h2 class="mobile-hero-text">{{ i18n "hero_title" }}</h2>
-        <div class="mobile-button-stack">
-            <a href="{{ .Site.Params.donateUrl }}" class="btn btn-lg btn-primary mobile-btn">{{ i18n "hero_donate" }}</a>
-            <a href="#volunteer" class="btn btn-lg btn-gold mobile-btn">{{ i18n "hero_volunteer" }}</a>
+    <!-- ====== HERO SECTION ====== -->
+    <section class="mb-hero">
+        <div class="mb-hero__bg">
+            <img src="{{ "images/minty_hero_image.jpg" | relURL }}" alt="Jose Vega" class="mb-hero__img">
+            <div class="mb-hero__overlay"></div>
         </div>
-    </div>
-</div>
+        <div class="container position-relative" style="z-index: 2;">
+            <div class="row align-items-center min-vh-100 py-5">
+                <div class="col-lg-7 text-center text-lg-start">
+                    <img src="{{ "images/main_logo_cropped.png" | relURL }}" alt="Jose Vega for Congress" class="mb-hero__logo mb-4">
+                    <h1 class="mb-hero__title">Save the Bronx<br><span class="text-accent">Victory Fund</span></h1>
+                    <p class="mb-hero__subtitle">A flash fundraiser to send a fighter to Congress.</p>
 
-<!-- Quote Section -->
-<div id="quote" class="container py-5 px-0 px-md-4">
-    <div class="row py-5 px-2 px-md-5 justify-content-center align-items-center">
-        <div class="col-lg-6 text-center pt-4 px-2 px-md-4 order-1 order-lg-1">
-            <p class="featured-quote">
-                <span class="red">&ldquo;</span> {{ i18n "quote_text" }}<span class="red">&rdquo;</span>
+                    <!-- Countdown + Donate -->
+                    <div class="mb-countdown-cta">
+                        <div class="mb-countdown" id="countdown">
+                            <div class="mb-countdown__block">
+                                <span class="mb-countdown__number" id="cd-days">00</span>
+                                <span class="mb-countdown__label">Days</span>
+                            </div>
+                            <div class="mb-countdown__sep">:</div>
+                            <div class="mb-countdown__block">
+                                <span class="mb-countdown__number" id="cd-hours">00</span>
+                                <span class="mb-countdown__label">Hours</span>
+                            </div>
+                            <div class="mb-countdown__sep">:</div>
+                            <div class="mb-countdown__block">
+                                <span class="mb-countdown__number" id="cd-minutes">00</span>
+                                <span class="mb-countdown__label">Min</span>
+                            </div>
+                            <div class="mb-countdown__sep">:</div>
+                            <div class="mb-countdown__block">
+                                <span class="mb-countdown__number" id="cd-seconds">00</span>
+                                <span class="mb-countdown__label">Sec</span>
+                            </div>
+                        </div>
+                        <a href="{{ .Site.Params.donateUrl }}?ref=moneybomb" class="btn btn-donate btn-lg" target="_blank" rel="noopener">
+                            <i class="fas fa-bolt me-2"></i>Donate Now
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Thermometer -->
+                <div class="col-lg-5 mt-5 mt-lg-0">
+                    <div class="mb-thermo">
+                        <div class="mb-thermo__header">
+                            <span class="mb-thermo__raised" id="thermo-raised">$0</span>
+                            <span class="mb-thermo__goal">of <strong id="thermo-goal">$50,000</strong> goal</span>
+                        </div>
+                        <div class="mb-thermo__track">
+                            <div class="mb-thermo__fill" id="thermo-fill" style="width: 0%;">
+                                <div class="mb-thermo__glow"></div>
+                            </div>
+                        </div>
+                        <div class="mb-thermo__stats">
+                            <span><strong id="thermo-donors">0</strong> donors</span>
+                            <span><strong id="thermo-pct">0</strong>% funded</span>
+                        </div>
+                        <div class="mb-thermo__milestones">
+                            <div class="mb-thermo__milestone" style="left: 25%;" data-label="$12,500"></div>
+                            <div class="mb-thermo__milestone" style="left: 50%;" data-label="$25,000"></div>
+                            <div class="mb-thermo__milestone" style="left: 75%;" data-label="$37,500"></div>
+                        </div>
+                    </div>
+
+                    <!-- Recent activity mini-feed in hero -->
+                    <div class="mb-minifeed mt-4" id="mini-feed">
+                        <div class="mb-minifeed__header">
+                            <span class="mb-minifeed__dot"></span> Live donations
+                        </div>
+                        <div class="mb-minifeed__list" id="mini-feed-list">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== WHY SUPPORT JOSE ====== -->
+    <section class="mb-issues">
+        <div class="container">
+            <h2 class="mb-section-title text-center">Why Support Jose Vega?</h2>
+            <p class="mb-section-subtitle text-center">Your donation fuels a campaign that fights for you.</p>
+
+            <div class="row g-4 mt-3">
+                <div class="col-md-6 col-lg-3">
+                    <div class="mb-issue-card">
+                        <div class="mb-issue-card__icon">
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
+                        <h3>Real Medicare for All</h3>
+                        <p>A genuine single-payer healthcare system to guarantee coverage for every American.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="mb-issue-card">
+                        <div class="mb-issue-card__icon mb-issue-card__icon--blue">
+                            <i class="fas fa-industry"></i>
+                        </div>
+                        <h3>Reindustrialize the Bronx</h3>
+                        <p>Make the Bronx the center for reindustrialization with a new Civilian Conservation Corps.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="mb-issue-card">
+                        <div class="mb-issue-card__icon mb-issue-card__icon--green">
+                            <i class="fas fa-passport"></i>
+                        </div>
+                        <h3>Immigration Reform</h3>
+                        <p>A robust, humane immigration reform that secures borders and treats people with dignity.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="mb-issue-card">
+                        <div class="mb-issue-card__icon mb-issue-card__icon--orange">
+                            <i class="fas fa-globe-americas"></i>
+                        </div>
+                        <h3>Peace through Development</h3>
+                        <p>End endless wars. Invest in global development and diplomacy instead of destruction.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== BOLD STATEMENT STRIP ====== -->
+    <section class="mb-strip">
+        <div class="mb-strip__scroll">
+            <div class="mb-strip__track">
+                <span class="mb-strip__item">Stop Wasteful Spending</span>
+                <span class="mb-strip__sep">&bull;</span>
+                <span class="mb-strip__item">Healthcare as a Right</span>
+                <span class="mb-strip__sep">&bull;</span>
+                <span class="mb-strip__item">Jobs for the Bronx</span>
+                <span class="mb-strip__sep">&bull;</span>
+                <span class="mb-strip__item">End Endless Wars</span>
+                <span class="mb-strip__sep">&bull;</span>
+                <span class="mb-strip__item">Fight Corruption</span>
+                <span class="mb-strip__sep">&bull;</span>
+                <span class="mb-strip__item">Real Representation</span>
+                <span class="mb-strip__sep">&bull;</span>
+                <!-- Duplicate for seamless loop -->
+                <span class="mb-strip__item">Stop Wasteful Spending</span>
+                <span class="mb-strip__sep">&bull;</span>
+                <span class="mb-strip__item">Healthcare as a Right</span>
+                <span class="mb-strip__sep">&bull;</span>
+                <span class="mb-strip__item">Jobs for the Bronx</span>
+                <span class="mb-strip__sep">&bull;</span>
+                <span class="mb-strip__item">End Endless Wars</span>
+                <span class="mb-strip__sep">&bull;</span>
+                <span class="mb-strip__item">Fight Corruption</span>
+                <span class="mb-strip__sep">&bull;</span>
+                <span class="mb-strip__item">Real Representation</span>
+                <span class="mb-strip__sep">&bull;</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== DONATION ACTIVITY FEED ====== -->
+    <section class="mb-feed">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-7">
+                    <h2 class="mb-section-title">Donation Messages</h2>
+                    <div class="mb-feed__list" id="donation-feed">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <div class="col-lg-5">
+                    <h2 class="mb-section-title">Share the Moneybomb</h2>
+                    <p class="text-muted-light mb-4">Spread the word and multiply the impact.</p>
+
+                    <div class="mb-share">
+                        <a href="https://twitter.com/intent/tweet?text=I%20just%20donated%20to%20Jose%20Vega%27s%20Save%20the%20Bronx%20Moneybomb!%20Help%20send%20a%20real%20fighter%20to%20Congress.&url={{ .Permalink }}" target="_blank" rel="noopener" class="mb-share__btn mb-share__btn--x">
+                            <i class="fa-brands fa-x-twitter"></i> Share on X
+                        </a>
+                        <a href="https://www.facebook.com/sharer/sharer.php?u={{ .Permalink }}" target="_blank" rel="noopener" class="mb-share__btn mb-share__btn--fb">
+                            <i class="fa-brands fa-facebook-f"></i> Share on Facebook
+                        </a>
+                        <button class="mb-share__btn mb-share__btn--copy" id="copy-link-btn" data-url="{{ .Permalink }}">
+                            <i class="fas fa-link"></i> Copy Link
+                        </button>
+                    </div>
+
+                    <!-- Mid-page donate CTA -->
+                    <div class="mb-cta-card mt-5">
+                        <h3>Every dollar counts</h3>
+                        <p>Jose Vega is running a grassroots campaign against the political machine. No corporate PACs. No lobbyist money. Just you.</p>
+                        <a href="{{ .Site.Params.donateUrl }}?ref=moneybomb" class="btn btn-donate btn-lg w-100" target="_blank" rel="noopener">
+                            <i class="fas fa-bolt me-2"></i>Donate Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== QUOTE / SOCIAL PROOF ====== -->
+    <section class="mb-social-proof">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <blockquote class="mb-blockquote">
+                        <p>&ldquo;The people of the Bronx deserve a representative who actually fights for them, not one who sells them out to the highest bidder.&rdquo;</p>
+                        <footer>Jose Vega</footer>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== FINAL CTA ====== -->
+    <section class="mb-final-cta">
+        <div class="container text-center">
+            <h2 class="mb-final-cta__title">Time is running out.</h2>
+            <p class="mb-final-cta__sub">Join hundreds of grassroots donors. Make your contribution before the clock hits zero.</p>
+            <div class="mb-countdown-cta mb-countdown-cta--center">
+                <div class="mb-countdown mb-countdown--light" id="countdown-bottom">
+                    <div class="mb-countdown__block">
+                        <span class="mb-countdown__number" id="cd2-days">00</span>
+                        <span class="mb-countdown__label">Days</span>
+                    </div>
+                    <div class="mb-countdown__sep">:</div>
+                    <div class="mb-countdown__block">
+                        <span class="mb-countdown__number" id="cd2-hours">00</span>
+                        <span class="mb-countdown__label">Hours</span>
+                    </div>
+                    <div class="mb-countdown__sep">:</div>
+                    <div class="mb-countdown__block">
+                        <span class="mb-countdown__number" id="cd2-minutes">00</span>
+                        <span class="mb-countdown__label">Min</span>
+                    </div>
+                    <div class="mb-countdown__sep">:</div>
+                    <div class="mb-countdown__block">
+                        <span class="mb-countdown__number" id="cd2-seconds">00</span>
+                        <span class="mb-countdown__label">Sec</span>
+                    </div>
+                </div>
+                <a href="{{ .Site.Params.donateUrl }}?ref=moneybomb" class="btn btn-donate btn-xl" target="_blank" rel="noopener">
+                    <i class="fas fa-bolt me-2"></i>Donate Now
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== FOOTER ====== -->
+    <footer class="mb-footer">
+        <div class="container text-center">
+            <img src="{{ "images/main_logo_cropped.png" | relURL }}" alt="Jose Vega for Congress" style="max-width: 120px;" class="mb-3">
+            <div class="mb-footer__social mb-3">
+                {{ range .Site.Params.social }}
+                <a href="{{ .url }}" target="_blank" rel="noopener"><i class="{{ .icon }}"></i></a>
+                {{ end }}
+            </div>
+            <p class="mb-footer__legal">
+                Paid for by Jose Vega for Congress | <a href="{{ "/privacy-policy/" | relURL }}">Privacy Policy</a>
+                <br><a href="{{ "/" | relURL }}">Back to VoteVega.nyc</a>
             </p>
-            <p class="featured-quote-author fs-5">Jose Vega</p>
         </div>
-        <div class="col-lg-6 d-flex justify-content-center pt-4 px-2 px-md-4 order-2 order-lg-2">
-            <div class="video-container" style="max-width: 550px; width: 100%; position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-                <iframe 
-                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;"
-                    src="https://www.youtube.com/embed/Mp_CJUkKVIg" 
-                    title="Jose Vega campaign video" 
-                    frameborder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                    allowfullscreen>
-                </iframe>
-            </div>
-        </div>
-    </div>
-</div>
+    </footer>
 
-<!-- Volunteer Signup Section -->
-<div id="volunteer" class="container-fluid py-5" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-top: 4px solid #dc3545;">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-8 text-center">
-                <div class="mb-5">
-                    <img width="50" src="{{ "images/favicon.png" | relURL }}" alt="" />
-                    <h2 class="display-5 fw-bold text-uppercase my-3" style="color: #212529; letter-spacing: 1px;">{{ i18n "volunteer_title" }}</h2>
-                    <p class="mb-4" style="font-size: 1.2rem; color: #495057; line-height: 1.6;">
-                        {{ i18n "volunteer_description" }}
-                    </p>
-                </div>
-                
-                <div class="card border-0 shadow-lg" style="border-radius: 15px; overflow: hidden;">
-                    <div class="card-body p-5">
-                        <form class="volunteer-form">
-                            <!-- Hidden field to track form source -->
-                            <input type="hidden" name="whichform" value="homepage">
-                            
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <div class="input-group mb-3">
-                                        <label for="name" class="visually-hidden">Name</label>
-                                        <span class="input-group-text border-0 shadow-sm d-none d-md-flex" style="background: #ffffff; border-radius: 10px 0 0 10px; padding: 1rem;">
-                                            <i class="fas fa-user" style="color: #dc3545;"></i>
-                                        </span>
-                                        <input type="text" class="form-control border-0 shadow-sm" id="name" name="name" placeholder="{{ i18n "volunteer_name_placeholder" }}" required
-                                               style="padding: 1rem; font-size: 1.1rem; height: 3.5rem; color: #212529; font-weight: 500; background: #ffffff;">
-                                    </div>
-                                </div>
-                                
-                                <div class="col-md-6">
-                                    <div class="input-group mb-3">
-                                        <label for="zip" class="visually-hidden">Zip Code</label>
-                                        <span class="input-group-text border-0 shadow-sm d-none d-md-flex" style="background: #ffffff; border-radius: 10px 0 0 10px; padding: 1rem;">
-                                            <i class="fas fa-map-marker-alt" style="color: #dc3545;"></i>
-                                        </span>
-                                        <input type="text" class="form-control border-0 shadow-sm" id="zip" name="zip" placeholder="{{ i18n "volunteer_zip_placeholder" }}" required
-                                               style="padding: 1rem; font-size: 1.1rem; height: 3.5rem; color: #212529; font-weight: 500; background: #ffffff;">
-                                    </div>
-                                </div>
-                                
-                                <div class="col-md-6">
-                                    <div class="input-group mb-3">
-                                        <label for="email" class="visually-hidden">Email</label>
-                                        <span class="input-group-text border-0 shadow-sm d-none d-md-flex" style="background: #ffffff; border-radius: 10px 0 0 10px; padding: 1rem;">
-                                            <i class="fas fa-envelope" style="color: #dc3545;"></i>
-                                        </span>
-                                        <input type="email" class="form-control border-0 shadow-sm" id="email" name="email" placeholder="{{ i18n "volunteer_email_placeholder" }}" required
-                                               style="padding: 1rem; font-size: 1.1rem; height: 3.5rem; color: #212529; font-weight: 500; background: #ffffff;">
-                                    </div>
-                                </div>
-                                
-                                <div class="col-md-6">
-                                    <div class="input-group mb-3">
-                                        <label for="phone" class="visually-hidden">Phone</label>
-                                        <span class="input-group-text border-0 shadow-sm d-none d-md-flex" style="background: #ffffff; border-radius: 10px 0 0 10px; padding: 1rem;">
-                                            <i class="fas fa-phone" style="color: #dc3545;"></i>
-                                        </span>
-                                        <input type="tel" class="form-control border-0 shadow-sm" id="phone" name="phone" placeholder="{{ i18n "volunteer_phone_placeholder" }}" required
-                                               style="padding: 1rem; font-size: 1.1rem; height: 3.5rem; color: #212529; font-weight: 500; background: #ffffff;">
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- reCAPTCHA -->
-                            <div class="row mt-3">
-                                <div class="col-12 d-flex justify-content-center">
-                                    <div class="g-recaptcha" data-sitekey="6LdB9k0sAAAAADT180PSrIEaH4PEdDGI_MQyT7W5"></div>
-                                </div>
-                            </div>
-                            
-                            <div class="row mt-4">
-                                <div class="col-12 text-center">
-                                    <button type="submit" class="btn btn-lg fw-bold text-uppercase px-5 py-3" 
-                                            style="background: linear-gradient(135deg, #dc3545, #c82333); 
-                                                   color: white; 
-                                                   border: none; 
-                                                   border-radius: 50px; 
-                                                   font-size: 1.1rem; 
-                                                   letter-spacing: 0.5px;
-                                                   box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
-                                                   transition: all 0.3s ease;" 
-                                            onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(220, 53, 69, 0.4)';" 
-                                            onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(220, 53, 69, 0.3)';"
-                                            onfocus="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(220, 53, 69, 0.4)';" 
-                                            onblur="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(220, 53, 69, 0.3)';"
-                                            onmousedown="this.style.transform='translateY(1px)';" 
-                                            onmouseup="this.style.transform='translateY(-2px)';">
-                                        <i class="fas fa-handshake me-2"></i>{{ i18n "volunteer_submit" }}
-                                    </button>
-                                </div>
-                            </div>
-                            
-                            <div class="row mt-3">
-                                <div class="col-12 text-center">
-                                    <small class="text-muted" style="font-size: 0.9rem;">
-                                        {{ i18n "volunteer_disclaimer" }}
-                                    </small>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<style>
-    /* Make inputs full-width with rounded corners on mobile */
-    @media (max-width: 767px) {
-        #volunteer .input-group .form-control {
-            border-radius: 10px !important;
-        }
-    }
-</style>
-
-<!-- Issues Section -->
-<div class="issues p-5 text-center" style="background-color: #f8f9fa;">
-    <div class="container py-4">
-        <div class="row justify-content-center align-items-stretch">
-            <!-- Medicare for All (dummy link for future policy) -->
-            <div class="col-lg-3 col-md-6 px-1 py-3 d-flex">
-                <a href="{{ "/policy/real-medicare-for-all/" | relURL }}" class="text-decoration-none text-reset d-block h-100 w-100">
-                    <div class="issue-item issue-link h-100 d-flex flex-column align-items-center" style="padding: 1rem; border-radius: 10px; transition: all 0.3s ease; cursor: pointer;">
-                        <div class="icon-container d-flex align-items-center justify-content-center" style="height: 120px; width: 100%;">
-                            <i class="fas fa-heartbeat" style="font-size: 4rem; color: #dc3545; transition: all 0.3s ease;"></i>
-                        </div>
-                        <div class="flex-grow-1 d-flex flex-column justify-content-between text-center">
-                            <h3 style="transition: all 0.3s ease; margin-bottom: 1rem;">{{ i18n "policy_medicare_title" }}</h3>
-                            <small class="text-muted mt-auto visually-hidden-until-hover" style="transition: opacity 0.3s ease; font-weight: 600;">
-                                <i class="fas fa-external-link-alt me-1"></i>{{ i18n "policy_read_link" }}
-                            </small>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            
-            <!-- Reindustrialization (Space CCC) -->
-            <div class="col-lg-3 col-md-6 px-1 py-3 d-flex">
-                <a href="{{ "/policy/space-ccc/" | relURL }}" class="text-decoration-none text-reset d-block h-100 w-100">
-                    <div class="issue-item issue-link h-100 d-flex flex-column align-items-center" style="padding: 1rem; border-radius: 10px; transition: all 0.3s ease; cursor: pointer;">
-                        <div class="icon-container d-flex align-items-center justify-content-center" style="height: 120px; width: 100%;">
-                            <i class="fas fa-industry" style="font-size: 4rem; color: #0d6efd; transition: all 0.3s ease;"></i>
-                        </div>
-                        <div class="flex-grow-1 d-flex flex-column justify-content-between text-center">
-                            <h3 style="transition: all 0.3s ease; margin-bottom: 1rem;">{{ i18n "policy_reindustrialization_title" }}</h3>
-                            <small class="text-muted mt-auto visually-hidden-until-hover" style="transition: opacity 0.3s ease; font-weight: 600;">
-                                <i class="fas fa-external-link-alt me-1"></i>{{ i18n "policy_read_link" }}
-                            </small>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            
-            <!-- Immigration Reform (dummy link for future policy) -->
-            <div class="col-lg-3 col-md-6 px-1 py-3 d-flex">
-                <a href="{{ "/policy/robust-immigration-reform/" | relURL }}" class="text-decoration-none text-reset d-block h-100 w-100">
-                    <div class="issue-item issue-link h-100 d-flex flex-column align-items-center" style="padding: 1rem; border-radius: 10px; transition: all 0.3s ease; cursor: pointer;">
-                        <div class="icon-container d-flex align-items-center justify-content-center" style="height: 120px; width: 100%;">
-                            <i class="fas fa-passport" style="font-size: 4rem; color: #198754; transition: all 0.3s ease;"></i>
-                        </div>
-                        <div class="flex-grow-1 d-flex flex-column justify-content-between text-center">
-                            <h3 style="transition: all 0.3s ease; margin-bottom: 1rem;">{{ i18n "policy_immigration_title" }}</h3>
-                            <small class="text-muted mt-auto visually-hidden-until-hover" style="transition: opacity 0.3s ease; font-weight: 600;">
-                                <i class="fas fa-external-link-alt me-1"></i>{{ i18n "policy_read_link" }}
-                            </small>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            
-            <!-- Peace through Development -->
-            <div class="col-lg-3 col-md-6 px-1 py-3 d-flex">
-                <a href="{{ "/policy/peace-through-development/" | relURL }}" class="text-decoration-none text-reset d-block h-100 w-100">
-                    <div class="issue-item issue-link h-100 d-flex flex-column align-items-center" style="padding: 1rem; border-radius: 10px; transition: all 0.3s ease; cursor: pointer;">
-                        <div class="icon-container d-flex align-items-center justify-content-center" style="height: 120px; width: 100%;">
-                            <i class="fas fa-globe-americas" style="font-size: 4rem; color: #fd7e14; transition: all 0.3s ease;"></i>
-                        </div>
-                        <div class="flex-grow-1 d-flex flex-column justify-content-between text-center">
-                            <h3 style="transition: all 0.3s ease; margin-bottom: 1rem;">{{ i18n "policy_peace_title" }}</h3>
-                            <small class="text-muted mt-auto visually-hidden-until-hover" style="transition: opacity 0.3s ease; font-weight: 600;">
-                                <i class="fas fa-external-link-alt me-1"></i>{{ i18n "policy_read_link" }}
-                            </small>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Issues Section Hover Effects -->
-<style>
-    .issue-link:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-        background-color: #ffffff !important;
-    }
-    
-    .issue-link:hover i {
-        transform: scale(1.1);
-    }
-    
-    .issue-link:hover h3 {
-        color: #dc3545 !important;
-    }
-    
-    .issue-link:hover small {
-        opacity: 1 !important;
-    }
-    
-    /* Responsive typography for issue cards */
-    @media (min-width: 992px) and (max-width: 1199px) {
-        .issue-item h3 {
-            font-size: 1.1rem !important;
-            line-height: 1.3 !important;
-        }
-    }
-    
-    @media (min-width: 1200px) and (max-width: 1399px) {
-        .issue-item h3 {
-            font-size: 1.2rem !important;
-            line-height: 1.4 !important;
-        }
-    }
-</style>
-
-<!-- About Section -->
-<div class="about-home container-fluid p-0">
-    <div class="row align-items-center g-0 p-0">
-        <div class="col-lg-6">
-            <img src="{{ "images/campaign-volunteers-compressed.jpg" | relURL }}" alt="Jose Vega with campaign volunteers" class="img-fluid" />
-        </div>
-        <div class="col-lg-6 p-5">
-            <div class="container">
-                <div class="col-xxl-9">
-                    <h2>{{ i18n "about_title" }}</h2>
-                    <p>{{ i18n "about_paragraph1" }}</p>
-
-                    <p>{{ i18n "about_paragraph2" }}</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- News Section -->
-<div id="news" class="container py-5 px-4">
-    <h2 class="text-center py-2 mx-2 display-4 text-uppercase">{{ i18n "news_title" }}
-    </h2>
-    <div class="row news pt-5 justify-content-center">
-        {{ range first 3 (where .Site.RegularPages "Section" "news").ByDate.Reverse }}
-        <div class="col-lg-4">
-            <h3 class="pt-2 pb-0 mb-0">
-                <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-            </h3>
-            <p class="post-meta mb-2">{{ .Date.Format "January 2, 2006" }}</p>
-            <p class="mb-2">{{ if .Description }}{{ .Description | truncate 120 }}{{ else }}{{ .Summary | truncate 120 }}{{ end }}</p>
-            <p><strong><a class="text-uppercase mt-3" href="{{ .RelPermalink }}">{{ i18n "news_continue_reading" }}</a></strong></p>
-        </div>
-        {{ end }}
-    </div>
-
-    <div class="row justify-content-center mb-5">
-        <div class="col-lg-3">
-            <div class="d-grid">
-                <a href="{{ "/news/" | relURL }}" class="btn btn-lg btn-primary">{{ i18n "news_all" }}</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Statements Section -->
-<div id="statements" class="container py-5 px-4">
-    <h2 class="text-center py-2 mx-2 display-4 text-uppercase">{{ i18n "statements_title" }}</h2>
-    <div class="row statements pt-5 justify-content-center">
-        {{ range first 3 (where .Site.RegularPages "Section" "statements").ByDate.Reverse }}
-        <div class="col-lg-4">
-            <h3 class="pt-2 pb-0 mb-0">
-                <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-            </h3>
-            <p class="post-meta mb-2">{{ .Date.Format "January 2, 2006" }}</p>
-            <p class="mb-2">{{ if .Description }}{{ .Description | truncate 120 }}{{ else }}{{ .Summary | truncate 120 }}{{ end }}</p>
-            <p><strong><a class="text-uppercase mt-3" href="{{ .RelPermalink }}">{{ i18n "statements_continue_reading" }}</a></strong></p>
-        </div>
-        {{ end }}
-    </div>
-
-    <div class="row justify-content-center mb-5">
-        <div class="col-lg-3">
-            <div class="d-grid">
-                <a href="{{ "/statements/" | relURL }}" class="btn btn-lg btn-primary">{{ i18n "statements_all" }}</a>
-            </div>
-        </div>
-    </div>
-</div>
-{{ end }}
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Moneybomb JS -->
+    <script src="{{ "js/moneybomb.js" | relURL }}"></script>
+</body>
+</html>
