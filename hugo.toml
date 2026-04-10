@@ -1,4 +1,4 @@
-baseURL = "https://votevega.nyc"
+baseURL = "https://vegavictoryfund.com"
 defaultContentLanguage = "en"
 buildFuture = true
 
@@ -6,11 +6,11 @@ buildFuture = true
 [languages]
   [languages.en]
     languageCode = "en-US"
-    title = "Jose Vega for Congress 2026 | Let's Save the Bronx"
+    title = "Vega Victory Fund | Let's Save the Bronx"
     weight = 1
   [languages.es]
     languageCode = "es-US"
-    title = "Jose Vega para el Congreso 2026 | Rescatemos el Bronx!"
+    title = "Fondo Vega Victory | Rescatemos el Bronx!"
     weight = 2
 
 # Content settings
