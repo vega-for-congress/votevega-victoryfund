@@ -30,7 +30,7 @@
     countdownStart: '2026-04-01T00:00:00Z',
     countdownEnd: '2026-04-17T00:00:00Z',
     goal: 25000,
-    nonStripeAmount: 1000, // ← Hard-coded amount (e.g. cash, checks, other platforms)
+    nonStripeAmount: 1250, // ← Hard-coded amount (e.g. cash, checks, other platforms)
 
     // Demo-only: starting simulated values
     startingAmount: 18742,
