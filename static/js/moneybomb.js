@@ -27,14 +27,14 @@
     // ---- Single source of truth for the fundraiser window ----
     // In live mode these are sent as query params to the API.
     // In demo mode they drive the local simulation.
-    countdownStart: '2026-04-01T00:00:00Z',
-    countdownEnd: '2026-04-17T00:00:00Z',
+    countdownStart: '2026-04-01T00:00:00-04:00',
+    countdownEnd: '2026-04-17T23:59:00-04:00',
     goal: 25000,
     nonStripeAmount: 1250, // ← Hard-coded amount (e.g. cash, checks, other platforms)
 
     // Demo-only: starting simulated values
-    startingAmount: 18742,
-    startingDonors: 314
+    startingAmount: 19814,
+    startingDonors: 119
   };
 
   // ===========================================
